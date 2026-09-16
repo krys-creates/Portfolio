@@ -1,0 +1,1534 @@
+/* =========================================================================
+   PROJECT DETAIL PAGE — shared page-specific styles for /works/*.html.
+   Shares variables, reset, header, footer, and decoration styles with
+   css/style.css (loaded first). This file only adds what's unique to
+   individual project pages.
+
+   Table of contents:
+   1. Project title
+   2. Meta grid (# role, # tools, etc.)
+   3. Description / quote block
+   4. Synopsis + narrative structure + resources/schema row (Blizzard Countdown)
+   5. Process phases list (numbered phase + result callouts)
+   6. Media placeholder (shared base for all placeholder art)
+   7. Media gallery (poster / postcards)
+   8. Postcard back (real content card)
+   9. Video blocks + lightbox
+   10. Booklet viewer
+   11. Brand showcase panel (WinRAR re-brand)
+   12. Timeline + Trinity campus search components
+   13. Artsy Dublin components (box rows, icon lists, swatch trio)
+   14. Disclaimer line
+   15. Responsive breakpoints
+   16. Reduced motion
+   ========================================================================= */
+
+/* index.html's project cards sit at 75% of the site's container width
+   (.project__frame) rather than running edge-to-edge, leaving generous
+   margin on both sides. Project detail pages match that same spirit here. */
+:root {
+  --project-content-width: calc(var(--container-width) * 0.85);
+}
+
+/* ---------------------------------------------------------------------
+   1. PROJECT TITLE
+   --------------------------------------------------------------------- */
+.project-hero {
+  max-width: var(--project-content-width);
+  margin: 0 auto;
+  padding: clamp(3rem, 7vw, 4.5rem) var(--container-pad) 0;
+}
+
+.project-hero__title {
+  margin: 0;
+  text-align: right;
+  font-size: clamp(1.05rem, 0.8vw + 1.2rem, 1.7rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--color-orange);
+}
+
+.project-hero__slash {
+  color: var(--color-orange);
+}
+
+.project-hero__link {
+  margin: 0.85rem 0 0;
+  text-align: right;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.project-hero__link a {
+  color: #6440BE;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.project-hero__link a:hover,
+.project-hero__link a:focus-visible {
+  color: #3F37C9;
+}
+
+/* no live build to link to yet — styled to read as clearly inactive
+   rather than a dead link that goes nowhere */
+.project-hero__link--placeholder {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ---------------------------------------------------------------------
+   2. META GRID (# role, # other collaborators, # tools, # associated with)
+   --------------------------------------------------------------------- */
+.project-meta {
+  max-width: var(--project-content-width);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 5vw, 3.5rem) var(--container-pad) 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+.project-meta__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.project-meta__item--right {
+  text-align: right;
+  align-items: flex-end;
+  align-self: flex-end;
+}
+
+.project-meta__label {
+  display: inline-block;
+  align-self: flex-start;
+  background: var(--color-border);
+  color: var(--color-text);
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 0.4em 0.7em;
+}
+
+.project-meta__item--right .project-meta__label {
+  align-self: flex-end;
+}
+
+.project-meta__value {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+.project-meta__value a {
+  color: #6440BE;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.project-meta__value a:hover,
+.project-meta__value a:focus-visible {
+  color: #3F37C9;
+}
+
+/* ---------------------------------------------------------------------
+   3. DESCRIPTION / QUOTE BLOCK
+   --------------------------------------------------------------------- */
+.project-quote {
+  max-width: var(--project-content-width);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 5vw, 3.5rem) var(--container-pad) 0;
+}
+
+.project-quote__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--color-dark);
+  color: var(--color-white);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.45em 1.1em;
+}
+
+.project-quote__sparkles {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.project-quote__sparkles .heading-sparkle {
+  width: 19px;
+  height: 19px;
+  margin: 0;
+  color: var(--color-white);
+}
+
+.project-quote__body {
+  background: var(--color-white);
+  padding: clamp(0.5rem, 1vw, 0.7rem) clamp(0.75rem, 2vw, 1.1rem);
+  border: 1px solid var(--color-border);
+  border-top: none;
+}
+
+.project-quote__text {
+  margin: 0;
+  font-style: italic;
+  font-size: clamp(0.78rem, 0.3vw + 0.72rem, 0.86rem);
+  line-height: 1.85;
+  color: var(--color-text);
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.project-quote__text a {
+  color: #6440BE;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.project-quote__text a:hover,
+.project-quote__text a:focus-visible {
+  color: #3F37C9;
+}
+
+/* factual project briefs (not a quotation) read better upright than
+   italic — used in place of .project-quote__text's default styling */
+.project-quote__text--plain {
+  font-style: normal;
+}
+
+/* ---------------------------------------------------------------------
+   4. SYNOPSIS / NARRATIVE STRUCTURE ROWS — TEXT + RESOURCES/SCHEMA
+      (Blizzard Countdown)
+   --------------------------------------------------------------------- */
+.project-synopsis {
+  max-width: var(--project-content-width);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 5vw, 3.5rem) var(--container-pad) 0;
+  display: grid;
+  /* the schema figure is a tall portrait diagram (~1:2) — a fixed, narrower
+     right column keeps its rendered height close to the text column's, so
+     the row doesn't leave a huge gap under the shorter text block */
+  grid-template-columns: 1fr clamp(200px, 21vw, 260px);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+}
+
+/* the narrative-structure row pairs one short paragraph with the much
+   taller schema figure — center the text against it instead of pinning
+   it to the top, so the leftover height reads as balanced, not empty */
+.project-synopsis--centered {
+  align-items: center;
+}
+
+/* the two rows read as one connected unit (schema image directly above the
+   resources HUD) — pull the second row in closer than the default section
+   spacing used everywhere else on the page */
+.project-synopsis + .project-synopsis {
+  padding-top: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+/* the quote box's dark bar reads as a strong visual stop — give the row
+   right after it a bit more breathing room than the default section gap */
+.project-quote + .project-synopsis {
+  padding-top: clamp(3.5rem, 7vw, 5rem);
+}
+
+.project-synopsis__heading {
+  margin: 1.75rem 0 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--color-text);
+}
+
+.project-synopsis__heading--first {
+  margin-top: 0;
+}
+
+.project-synopsis__text p {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: var(--color-text);
+}
+
+.project-synopsis__text p:last-child {
+  margin-bottom: 0;
+}
+
+/* standalone lead-in label sitting directly above a media row (e.g.
+   "work excerpts:" above the interface-screenshots gallery) — matches the
+   narrower text column's width so its left edge lines up with the body
+   copy above it, rather than the wider gallery row below it */
+.project-section-label {
+  max-width: var(--project-content-width);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 5vw, 3.5rem) var(--container-pad) 0;
+}
+
+/* the schema figure above already carries plenty of its own bottom space
+   (it runs much taller than its paired text) — don't stack the section's
+   usual top padding on top of that */
+.project-synopsis + .project-section-label {
+  padding-top: clamp(0.25rem, 1vw, 0.5rem);
+}
+
+.project-section-label .project-synopsis__heading {
+  margin: 0;
+}
+
+/* pull the labeled row up close to its label instead of the usual gap
+   a .project-gallery leaves above itself */
+.project-section-label + .project-gallery {
+  padding-top: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+/* ---------------------------------------------------------------------
+   5. PROCESS PHASES LIST (numbered phase + result callouts)
+   --------------------------------------------------------------------- */
+.project-phases {
+  max-width: var(--project-content-width);
+  margin: 0 auto;
+  padding: clamp(1rem, 3vw, 2rem) var(--container-pad) 0;
+}
+
+/* the PHASE 04 section's separator line sits right at this padding's top
+   edge — give it more room above than the default so it doesn't crowd
+   the postcard image right above it */
+.project-phases--roomy-top {
+  padding-top: clamp(3rem, 6vw, 4rem);
+}
+
+.phase {
+  display: grid;
+  grid-template-columns: minmax(190px, 260px) 1fr;
+  gap: 1.5rem clamp(1.5rem, 4vw, 3rem);
+  padding: clamp(1.75rem, 4vw, 2.5rem) 0;
+}
+
+.phase + .phase {
+  border-top: 1px solid rgba(23, 20, 18, 0.22);
+}
+
+/* for a .phase that's the first (and only) one in its own
+   .project-phases section — .phase + .phase can't reach it, but it still
+   needs the same separator line above it as every other phase gets */
+.phase--separated {
+  border-top: 1px solid rgba(23, 20, 18, 0.22);
+}
+
+/* the Trinity page's "PHASE 03: DESIGNING" heading leads straight into its
+   own "i/" sub-line rather than sitting beside it — stack them in one
+   column instead of the usual label/content split */
+.phase--stacked {
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+}
+
+/* the standalone "i/"/"ii/" lead-in lines sit right above their own image
+   row — only the bottom of the base .phase padding needs shrinking, so
+   the top (spacing from whatever precedes it) stays untouched */
+.phase--compact-bottom {
+  padding-bottom: clamp(0.5rem, 1.5vw, 0.75rem);
+}
+
+.phase__label {
+  margin: 0;
+  font-size: clamp(0.95rem, 0.4vw + 0.85rem, 1.1rem);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
+/* only the digit after the leading zero is highlighted, matching the
+   reference wireframe ("PHASE 01" — "0" stays black, "1" turns orange) */
+.phase__num {
+  color: var(--color-orange);
+}
+
+.phase__desc {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.75;
+  color: var(--color-text);
+}
+
+.phase__desc + .phase__desc,
+.phase__list + .phase__desc {
+  margin-top: 1.25rem;
+}
+
+.phase__desc strong {
+  font-weight: 700;
+}
+
+/* the result callout: a small solid badge stuck over the top-left corner
+   of a bordered box below it */
+.phase__result {
+  position: relative;
+  margin-top: 2.25rem;
+}
+
+.phase__result-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  position: absolute;
+  top: -14px;
+  left: -14px;
+  z-index: 2;
+  background: var(--color-orange);
+  border: none;
+  padding: 0.3em 0.85em;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--color-white);
+}
+
+.phase__result-box {
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  padding: clamp(0.9rem, 2vw, 1.2rem) clamp(1rem, 2.5vw, 1.4rem);
+}
+
+.phase__result-box p {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+.phase__result-box strong {
+  font-weight: 700;
+}
+
+/* ---------------------------------------------------------------------
+   6. MEDIA PLACEHOLDER (shared base for all placeholder art)
+   --------------------------------------------------------------------- */
+.media-placeholder {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  /* fills its aspect-ratio'd .project-figure__media parent, the same way
+     .project-figure__zoom does for a real image */
+  width: 100%;
+  height: 100%;
+  background: var(--color-border);
+}
+
+.media-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(23, 20, 18, 0.045) 10px,
+    rgba(23, 20, 18, 0.045) 20px
+  );
+}
+
+.media-placeholder__label {
+  position: relative;
+  z-index: 1;
+  max-width: 22ch;
+  text-align: center;
+  font-size: 0.68rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  padding: 1rem;
+}
+
+/* ---------------------------------------------------------------------
+   7. MEDIA GALLERY (poster / postcards)
+   --------------------------------------------------------------------- */
+.project-gallery {
+  /* media rows run wider than the text sections, for bigger imagery */
+  max-width: calc(var(--container-width) * 0.93);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 5vw, 3.5rem) var(--container-pad) 0;
+  display: grid;
+  /* poster and postcard-front render at near-identical sizes in the
+     reference wireframe (both ~1.41 aspect ratio, same width) */
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  align-items: start;
+}
+
+/* pulls a gallery row up closer to a lead-in line directly above it
+   (e.g. Trinity page's "i/ low-fidelity drafts"), instead of the usual
+   generous section gap */
+.project-gallery--tight-top {
+  padding-top: clamp(1.25rem, 3vw, 1.75rem);
+  /* Trinity-only modifier — narrows the row to match the same
+     left/right margin as the page's text sections (--project-content-
+     width), rather than the wider standard gallery width */
+  max-width: var(--project-content-width);
+}
+
+/* pulls the two images in a row closer together, so they read as one
+   tighter block rather than two small, separated screens — also narrows
+   the row to the page's text-section width for the same reason as
+   --tight-top above (both are Trinity-only modifiers) */
+.project-gallery--roomy {
+  /* the 1fr columns absorb this from their own width, so a bigger gap
+     doesn't push the row past the gallery's max-width/side margins */
+  gap: 1.25rem;
+  max-width: var(--project-content-width);
+}
+
+/* Trinity page's low-fidelity drafts: 4 small screens in a single row,
+   rather than the site's usual 2-up gallery */
+/* pairs with .phase--compact — shrinks a phases section's own top padding
+   the same way */
+.project-phases--tight {
+  padding-top: clamp(0.25rem, 1vw, 0.5rem);
+}
+
+/* grid items default to min-width: auto, which for an item containing an
+   <img> resolves to that image's own intrinsic width. Two figures with
+   differently-sized source images (even at the same aspect-ratio) can
+   then throw off an even 1fr/1fr split. min-width: 0 lets the track
+   sizing follow the fr values instead of each item's own content. */
+.project-gallery > .project-figure {
+  min-width: 0;
+  /* <figure> carries a default browser margin (1em 40px) — left in place,
+     it adds 80px of invisible space between two side-by-side images on
+     top of the grid's own gap */
+  margin: 0;
+}
+
+/* some rows pair a narrow figure with a wide one rather than matching
+   widths — e.g. the brand-design page's colour-palette+logo and
+   Instagram+LinkedIn-post rows. Two separate modifiers since the two rows
+   don't necessarily want the exact same split. */
+.project-gallery--asymmetric {
+  /* colour palette : logo, measured at roughly 1:2 off the reference
+     wireframe */
+  grid-template-columns: 1fr 2fr;
+}
+
+.project-gallery--asymmetric-2 {
+  /* Instagram post : LinkedIn post — Instagram sized up from the
+     wireframe's ~1:2 read */
+  grid-template-columns: 1.2fr 1.8fr;
+}
+
+.project-figure__media {
+  /* fallback ratio for any future figure that doesn't set its own exact
+     aspect-ratio inline to match its real asset */
+  aspect-ratio: 4 / 5;
+  position: relative;
+  overflow: hidden;
+  /* the default --color-border (10% opacity) reads fine against a plain
+     cream image edge, but disappears against a busier or similarly-toned
+     screenshot — darker so it stays visible regardless of the image */
+  border: 1px solid rgba(23, 20, 18, 0.22);
+}
+
+.project-figure--wide .project-figure__media {
+  aspect-ratio: 16 / 10;
+}
+
+.project-figure__zoom {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 0;
+  background: none;
+  cursor: zoom-in;
+}
+
+.project-figure__media img {
+  width: 100%;
+  height: 100%;
+  /* contain rather than cover: the container's aspect-ratio is set inline
+     to match each image's real dimensions exactly, so contain and cover
+     render identically here — contain is the safe default in case that
+     ever drifts out of sync, since it can never crop or stretch the art */
+  object-fit: contain;
+  object-position: center;
+  transition: transform var(--transition-med) var(--ease-out);
+}
+
+.project-figure__zoom:hover img,
+.project-figure__zoom:focus-visible img {
+  transform: scale(1.03);
+}
+
+.project-figure__caption {
+  margin: 0.9rem 0 0;
+  font-size: 0.82rem;
+  color: var(--color-dark);
+}
+
+/* ---------------------------------------------------------------------
+   8. POSTCARD BACK
+   --------------------------------------------------------------------- */
+.postcard-back-wrap {
+  /* media rows run wider than the text sections, for bigger imagery */
+  max-width: calc(var(--container-width) * 0.93);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 5vw, 3.5rem) var(--container-pad) 0;
+  display: flex;
+  justify-content: center;
+}
+
+.postcard-back-wrap--left {
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  /* Trinity-only modifier — narrows to match the same left/right margin
+     as the page's text sections and its other (--tight-top/--roomy)
+     media rows, rather than the wider standard gallery width */
+  max-width: var(--project-content-width);
+}
+
+/* sits in the empty space to the right of the left-aligned figure, rather
+   than below it as its own centered line */
+.postcard-back-wrap__link {
+  margin: 0 0 0 clamp(1.5rem, 4vw, 2.5rem);
+  text-align: left;
+}
+
+.postcard-back-wrap .project-figure {
+  width: 100%;
+  /* the reference wireframe shows the postcard back at roughly the same
+     size as a single poster/postcard-front column, not noticeably smaller */
+  max-width: 520px;
+  /* <figure>'s default browser margin (1em 40px) otherwise shifts this
+     40px right of the other gallery rows' left edge */
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------------
+   9. VIDEO BLOCKS + LIGHTBOX
+   --------------------------------------------------------------------- */
+.project-videos {
+  /* media rows run wider than the text sections, for bigger footage */
+  max-width: calc(var(--container-width) * 0.93);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 5vw, 3.5rem) var(--container-pad) 0;
+  display: grid;
+  /* animation 1 (vid-1.mp4, ~0.9 ratio, near-square/portrait) and
+     animation 2 (the subsea-cables video, ~1.78 ratio, wide landscape)
+     measure ~786px vs ~1018px wide in the reference wireframe (~44:56) —
+     equal columns would exaggerate the height difference between them
+     well past that, since each box's aspect-ratio is locked to its file */
+  grid-template-columns: 0.87fr 1.13fr;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  align-items: start;
+}
+
+.project-video__thumb {
+  width: 100%;
+  /* fallback ratio for any future video that doesn't set its own exact
+     aspect-ratio inline to match its real file */
+  aspect-ratio: 4 / 5;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--color-border);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.project-video--wide .project-video__thumb {
+  aspect-ratio: 16 / 10;
+}
+
+.project-video__preview {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* contain rather than cover: each thumb's aspect-ratio is set inline to
+     match its real video dimensions exactly, so this can never crop or
+     stretch the footage */
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.project-video__play {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: var(--color-white);
+  transition: transform var(--transition-med) var(--ease-out);
+}
+
+.project-video__thumb:hover .project-video__play,
+.project-video__thumb:focus-visible .project-video__play {
+  transform: scale(1.08);
+}
+
+.project-video__play svg {
+  margin-left: 3px;
+}
+
+.project-video__caption {
+  margin: 0.9rem 0 0;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+}
+
+.project-video__caption-title {
+  display: block;
+  font-style: italic;
+}
+
+/* lightbox */
+.video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-med) var(--ease-out), visibility var(--transition-med);
+}
+
+.video-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.video-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(23, 20, 18, 0.78);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* same bare image-and-close-button treatment as .image-modal — no
+   surrounding card or caption text */
+.video-modal__panel {
+  position: relative;
+  z-index: 1;
+  max-width: min(92vw, 1100px);
+  max-height: 90vh;
+  transform: translateY(10px) scale(0.98);
+  transition: transform var(--transition-med) var(--ease-out);
+}
+
+.video-modal.is-open .video-modal__panel {
+  transform: translateY(0) scale(1);
+}
+
+.video-modal__close {
+  position: absolute;
+  top: -0.85rem;
+  right: -0.85rem;
+  z-index: 1;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-white);
+  color: var(--color-dark);
+  border: none;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.video-modal__video {
+  display: block;
+  max-width: min(92vw, 1100px);
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  /* overridden inline per video (js/video-lightbox.js) to match its real
+     aspect ratio exactly */
+  aspect-ratio: 16 / 10;
+  background: var(--color-text);
+}
+
+/* image lightbox — same open/close pattern as .video-modal above, sized
+   for a single large image rather than a fixed video panel */
+.image-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-med) var(--ease-out), visibility var(--transition-med);
+}
+
+.image-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.image-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(23, 20, 18, 0.78);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.image-modal__panel {
+  position: relative;
+  z-index: 1;
+  max-width: min(92vw, 1100px);
+  max-height: 90vh;
+  transform: translateY(10px) scale(0.98);
+  transition: transform var(--transition-med) var(--ease-out);
+}
+
+.image-modal.is-open .image-modal__panel {
+  transform: translateY(0) scale(1);
+}
+
+.image-modal__close {
+  position: absolute;
+  top: -0.85rem;
+  right: -0.85rem;
+  z-index: 1;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-white);
+  color: var(--color-dark);
+  border: none;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.image-modal__img {
+  display: block;
+  max-width: min(92vw, 1100px);
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  /* transparent, not the cream page background — a bright, sharp-edged
+     box was showing around/behind images against the dark backdrop */
+  background: transparent;
+}
+
+/* ---------------------------------------------------------------------
+   10. BOOKLET VIEWER
+   --------------------------------------------------------------------- */
+.booklet-wrap {
+  max-width: var(--project-content-width);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 5vw, 3.5rem) var(--container-pad) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* the bare <figure> wrapping .booklet is a flex item under
+   align-items: center above, which shrinks it to its content's size
+   instead of stretching it — leaving .booklet's own width: 100% with
+   nothing definite to resolve against, so it collapsed to the iframe's
+   tiny intrinsic default. Constraining the figure itself fixes that. */
+.booklet-wrap > figure {
+  width: 100%;
+  max-width: 820px;
+}
+
+.booklet {
+  width: 100%;
+  /* the reference wireframe's booklet viewer runs much wider relative to
+     the page than 620px did — roughly 70% of the content column */
+  max-width: 820px;
+  /* height tracks width exactly at any screen size, rather than
+     approximating it with vw */
+  aspect-ratio: 3 / 2;
+  background: #E7E3DC;
+  border: 1px solid var(--color-border);
+  padding: clamp(0.5rem, 1.5vw, 0.85rem);
+}
+
+/* the PDF's own viewer supplies scrolling/paging chrome (matching the
+   native-scrollbar look in the reference wireframe), so the iframe just
+   fills the frame rather than this container scrolling it */
+.booklet__frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: var(--color-white);
+}
+
+.booklet-caption {
+  margin: 1.1rem 0 0;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+}
+
+/* ---------------------------------------------------------------------
+   11. BRAND SHOWCASE PANEL (WinRAR re-brand)
+   --------------------------------------------------------------------- */
+/* lead sparkle in front of the "STRATEGIC DIRECTION" label — same icon
+   used in the quote bar elsewhere, sized to sit on the text's cap-height */
+.phase__sparkle {
+  width: 1.9em;
+  height: 1.9em;
+  margin: 0 0.15em 0 0;
+  color: var(--color-orange);
+  vertical-align: -0.6em;
+}
+
+/* the "refreshed design" callout holds several distinct design elements
+   (logo, palette, type sample) rather than one paragraph — give it more
+   room than the default result-box padding */
+.phase__result-box--showcase {
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.brand-showcase__logo {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-bottom: clamp(1.25rem, 3vw, 1.75rem);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* the renewed logo lockup — a real image, sized to sit comfortably next
+   to its "// renewed logo" note rather than filling the whole row */
+.brand-showcase__logo-zoom {
+  display: block;
+  width: auto;
+  height: clamp(44px, 6vw, 64px);
+}
+
+.brand-showcase__logo-zoom img {
+  display: block;
+  width: auto;
+  height: 100%;
+}
+
+.brand-showcase__note {
+  font-style: italic;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.brand-showcase__palette {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: clamp(1rem, 3vw, 1.75rem);
+  padding: clamp(1.25rem, 3vw, 1.75rem) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.brand-showcase__swatches {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.brand-showcase__swatch {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: flex-end;
+  padding: 0.4rem;
+}
+
+.brand-showcase__swatch span {
+  font-size: 0.58rem;
+  font-weight: 400;
+  color: var(--color-white);
+}
+
+.brand-showcase__palette-note {
+  margin: 0;
+  flex: 1 1 220px;
+  min-width: 200px;
+  font-style: italic;
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: var(--color-text-muted);
+}
+
+/* on the Trinity page this note follows the font showcase as its own
+   block (rather than sitting inline beside a palette, as on the WinRAR
+   page) — give it room to breathe above it */
+.brand-showcase__font-showcase + .brand-showcase__palette-note {
+  margin-top: 1.75rem;
+}
+
+.brand-showcase__palette-note--spaced {
+  margin-top: 1.5rem;
+}
+
+.brand-showcase__palette-sparkle {
+  width: 1.3em;
+  height: 1.3em;
+  margin: 0 0.4em 0 0;
+  color: var(--color-orange);
+  vertical-align: -0.25em;
+}
+
+.brand-showcase__type {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  padding-top: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.brand-showcase__type-sample {
+  margin: 0;
+  /* names "Special Gothic Semibold" and is set in that actual typeface,
+     rather than the page's own JetBrains Mono, so the sample demonstrates
+     itself — loaded on works/winrar-rebrand.html only. Expanded One's
+     letterforms read cramped at body size without extra tracking. */
+  font-family: 'Special Gothic Expanded One', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--color-dark);
+}
+
+/* ---------------------------------------------------------------------
+   12. TIMELINE + TRINITY CAMPUS SEARCH COMPONENTS
+   --------------------------------------------------------------------- */
+/* sparkle-node timeline for UX-research / testing-and-impact phase content
+   — ported from css/about.css's experience/education timeline so
+   js/timeline.js (which just queries .timeline generically) works here
+   unchanged. Kept as a single column, unlike about.html's 2-up grid. */
+.timeline {
+  --tl-sparkle: 24px;
+  --tl-gap: 10px;
+  position: relative;
+  padding-left: calc(var(--tl-sparkle) + var(--tl-gap));
+}
+
+.timeline__line {
+  position: absolute;
+  left: calc(var(--tl-sparkle) / 2 - 0.5px);
+  top: 0;
+  width: 1px;
+  height: 0;
+  background: var(--color-border);
+  transition: height 1.4s var(--ease-out), top 1.4s var(--ease-out);
+}
+
+.timeline.is-revealed .timeline__line {
+  height: var(--tl-line-height, 0px);
+}
+
+.timeline__item {
+  position: relative;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out);
+}
+
+.timeline__item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timeline__item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline__sparkle {
+  position: absolute;
+  left: calc(-1 * (var(--tl-sparkle) + var(--tl-gap)));
+  top: 0.1em;
+  width: var(--tl-sparkle);
+  height: var(--tl-sparkle);
+  color: var(--color-text);
+}
+
+/* the testing-and-impact timeline uses orange sparkles, unlike the
+   UX-research timeline above it, which stays black */
+.timeline--orange .timeline__sparkle {
+  color: var(--color-orange);
+}
+
+.timeline__sparkle svg {
+  width: 100%;
+  height: 100%;
+}
+
+.timeline__heading {
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--color-orange);
+}
+
+/* bullet lists inside phase content, styled to match .phase__desc */
+.phase__list {
+  margin: 0.75rem 0 0;
+  padding-left: 1.2em;
+  list-style: disc;
+  font-size: 0.85rem;
+  line-height: 1.75;
+  color: var(--color-text);
+}
+
+.phase__list li::marker {
+  color: var(--color-orange);
+}
+
+.phase__list li + li {
+  margin-top: 0.75rem;
+}
+
+/* i/ ii/ iii/ iv/ roman-numeral sub-sections within a phase */
+.phase__subhead {
+  font-weight: 700;
+  color: var(--color-orange);
+}
+
+.phase__subhead-note {
+  font-weight: 400;
+  color: var(--color-text);
+}
+
+.phase__desc--spaced {
+  margin-top: 2rem;
+}
+
+/* text + a small supporting diagram side by side within a phase */
+.phase-inline-media {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  align-items: start;
+  margin-top: 1.25rem;
+}
+
+.phase-inline-media__text {
+  flex: 1 1 240px;
+  min-width: 0;
+}
+
+.phase-inline-media__text .phase__desc:first-child {
+  margin-top: 0;
+}
+
+.phase-inline-media__figure {
+  flex: 0 1 320px;
+  width: 100%;
+  max-width: 320px;
+}
+
+/* compact colour-swatch + font-name row (Old:/New: colours & fonts) —
+   simpler than the WinRAR page's labeled palette swatches, so a couple of
+   size/outline modifiers extend .brand-showcase__swatch rather than
+   duplicating it */
+.brand-showcase__type-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.brand-showcase__type-row--spaced {
+  margin-top: 1.25rem;
+}
+
+.brand-showcase__type-label {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-text);
+  min-width: 3.5ch;
+}
+
+.brand-showcase__swatch--sm {
+  /* big enough to fit a 7-character hex label, like the WinRAR page's own
+     swatches do at 64px */
+  width: 76px;
+  height: 76px;
+  padding: 0.35rem;
+}
+
+/* the New: swatches carry both the colour's name and its hex code, so
+   they run wider/taller than the plain hex-only Old: ones, with room for
+   two lines of text */
+.brand-showcase__swatch--named {
+  width: clamp(95px, 12vw, 120px);
+  height: clamp(70px, 8.5vw, 85px);
+  padding: 0.5rem;
+}
+
+.brand-showcase__swatch--named span {
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
+
+.brand-showcase__swatch--outline {
+  border: 1px solid var(--color-border);
+}
+
+/* the base .brand-showcase__swatch label is white text, for the dark
+   swatches — the pale ones (white / parchment) need a dark label instead */
+.brand-showcase__swatch-label--dark {
+  color: var(--color-text) !important;
+}
+
+.brand-showcase__font-sample {
+  font-size: 0.85rem;
+  color: var(--color-text);
+}
+
+/* each names a real typeface and is set in it, rather than the page's own
+   JetBrains Mono, so the sample demonstrates itself */
+.brand-showcase__font-sample--crimson {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.brand-showcase__font-sample--dmsans {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.brand-showcase__font-sample--sourcesans {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.brand-showcase__font-sample-label {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* Old:/New: font pairs, stacked below the colour swatches and set well
+   apart from each other, matching the reference wireframe: a big bold
+   demo of each typeface with a smaller sample of its pair directly under
+   it, rather than running inline beside the colour chips */
+.brand-showcase__font-showcase {
+  display: flex;
+  flex-direction: column;
+  padding-top: clamp(1.5rem, 3.5vw, 2.25rem);
+}
+
+.brand-showcase__font-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.brand-showcase__font-group--spaced {
+  margin-top: clamp(2.5rem, 6vw, 3.5rem);
+}
+
+.brand-showcase__font-sample--lg {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+/* dark variant of the result box, for the campanile graphic + reference
+   photo pairing, which sit on a navy background in the reference wireframe */
+.phase__result-box--dark {
+  background: #042851;
+  border-color: #042851;
+}
+
+/* the campanile graphic (tall-ish, ~1.37:1) and the reference photo
+   (wide, ~2:1) sit at a shared HEIGHT rather than a shared column width —
+   an equal-width grid would leave them different heights instead, unlike
+   the reference wireframe */
+.brand-showcase__elements {
+  display: flex;
+  /* bottom-align the figures — each caption sits directly under its own
+     image (no forced gap between them), and because both images bottom
+     out at the same line, the captions land on the same line too. Any
+     leftover space from the height difference falls above the shorter
+     image, not between it and its caption. */
+  align-items: flex-end;
+  /* pins the first figure to the box's left padding and the last to its
+     right padding, so both sides read as the same margin — left-aligned
+     content would otherwise dump all the box's spare width on the right */
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: clamp(3.25rem, 7.5vw, 5rem);
+}
+
+.brand-showcase__elements .project-figure {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.brand-showcase__elements .project-figure__media {
+  /* width: auto doesn't resolve via aspect-ratio here — Chromium fails to
+     derive an intrinsic width from aspect-ratio + height when the sized
+     box's content includes a <button> (the zoom button), inside a flex
+     item; it falls back to filling all available width instead.
+     fit-content forces the aspect-ratio-derived size through correctly. */
+  width: fit-content;
+}
+
+/* the campanile graphic reads small next to the reference photo at a
+   shared height — sized up on its own, with the reference photo sized
+   down to match, rather than both sharing one height value */
+.brand-showcase__elements .project-figure:first-child .project-figure__media {
+  height: clamp(105px, 11.5vw, 165px);
+}
+
+.brand-showcase__elements .project-figure:last-child .project-figure__media {
+  height: clamp(82px, 9vw, 128px);
+}
+
+.media-placeholder--dark {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.media-placeholder--dark .media-placeholder__label {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.project-figure__caption--on-dark {
+  color: #F8F6F0;
+}
+
+/* small supporting note beside a phase label (e.g. "10 participants") */
+.phase__aside {
+  margin: 0.75rem 0 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.phase__aside-sparkle {
+  width: 1.2em;
+  height: 1.2em;
+  margin: 0;
+  color: var(--color-orange);
+}
+
+/* sits inside .project-phases, which already constrains width and adds
+   the container padding — its own copy of both would double the inset */
+.phase__future {
+  margin: 2.5rem 0 0;
+  font-size: 0.85rem;
+  color: var(--color-text);
+}
+
+.phase__future strong {
+  color: var(--color-orange);
+}
+
+/* ---------------------------------------------------------------------
+   13. ARTSY DUBLIN COMPONENTS (box rows, icon lists, swatch trio)
+   --------------------------------------------------------------------- */
+/* the "the users are" row: two plain bordered boxes side by side, rather
+   than the phase__list bullets used for "they need"/"but they encounter" */
+.timeline__box-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 0.75rem;
+}
+
+.timeline__box {
+  flex: 1 1 220px;
+  border: 1px solid var(--color-border);
+  padding: 1rem 1.25rem;
+  font-size: 0.85rem;
+  line-height: 1.75;
+  color: var(--color-text);
+}
+
+.timeline__box strong {
+  font-weight: 700;
+}
+
+/* "search & discovery" + "personalisation" sit side by side; "social
+   layer" spans the full width of the row below them */
+.result-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.phase__result--full {
+  margin-top: 1.5rem;
+}
+
+/* bulleted list using the site's sparkle icon as the marker, for content
+   inside a phase__result-box (search & discovery / personalisation /
+   social layer) */
+.icon-list {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.85rem;
+  line-height: 1.75;
+  color: var(--color-text);
+}
+
+.icon-list li {
+  position: relative;
+  padding-left: 1.6em;
+}
+
+.icon-list li + li {
+  margin-top: 1rem;
+}
+
+.icon-list__bullet {
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  width: 0.85em;
+  height: 0.85em;
+  margin: 0;
+  color: var(--color-orange);
+}
+
+.icon-list strong {
+  font-weight: 700;
+}
+
+/* PHASE 03's "WARM & TACTILE & CULTURAL" lead-in keywords */
+.accent-word {
+  font-weight: 700;
+  color: var(--color-orange);
+}
+
+/* the three background/primary/accents swatches, each with its own small
+   italic caption below (unlike the WinRAR/Trinity pages' shared Old:/New:
+   row labels) */
+.palette-trio {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  margin-top: 1.5rem;
+}
+
+.palette-trio__item {
+  margin: 0;
+}
+
+.palette-trio__caption {
+  margin: 0.6rem 0 0;
+  font-style: italic;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+/* ---------------------------------------------------------------------
+   14. DISCLAIMER LINE
+   --------------------------------------------------------------------- */
+.project-disclaimer {
+  max-width: var(--project-content-width);
+  margin: var(--section-gap) auto 0;
+  padding: 0 var(--container-pad);
+  text-align: center;
+}
+
+.project-disclaimer p {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--color-text);
+}
+
+/* ---------------------------------------------------------------------
+   15. RESPONSIVE BREAKPOINTS
+   --------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .project-hero__title {
+    text-align: left;
+  }
+
+  .project-hero__link {
+    text-align: left;
+  }
+
+  .project-synopsis {
+    grid-template-columns: 1fr;
+  }
+
+  .project-meta__value {
+    white-space: normal;
+  }
+
+  .project-meta__item--right {
+    text-align: left;
+    align-items: flex-start;
+    align-self: stretch;
+  }
+
+  .project-meta__item--right .project-meta__label {
+    align-self: flex-start;
+  }
+
+  .project-gallery,
+  .project-gallery--asymmetric,
+  .project-gallery--asymmetric-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .project-videos {
+    grid-template-columns: 1fr;
+  }
+
+  .phase {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   16. REDUCED MOTION
+   --------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .project-video__play,
+  .video-modal,
+  .video-modal__panel,
+  .image-modal,
+  .image-modal__panel,
+  .project-figure__media img,
+  .timeline__line,
+  .timeline__item {
+    transition: none !important;
+  }
+}

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trinity Campus Buildings Search Engine (2026) — K.M.</title>
+  <meta name="description" content="Trinity Campus Buildings Search Engine — an accessible campus navigation platform prototype: UX research, interface redesign, an interactive map & A-Z catalogue, and usability testing by K.M.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Roboto+Mono:wght@400;500;600;700;800&family=Crimson+Pro:wght@400;600&family=DM+Sans:wght@400;600&family=Source+Sans+3:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/project.css?v=91">
+</head>
+<body>
+
+  <!-- Decorative floating squares — identical markup/behaviour to other pages -->
+  <div class="decorations" aria-hidden="true" id="decorations">
+    <span class="decoration decoration--left" style="--top:1.0%; --offset:5.4%; --size:56px; --opacity:0.6;" data-response="0.04"></span>
+    <span class="decoration decoration--right" style="--top:4.9%; --offset:7.0%; --size:38px; --opacity:0.4;" data-response="0.038"></span>
+    <span class="decoration decoration--right" style="--top:7.5%; --offset:10.0%; --size:64px; --opacity:0.64;" data-response="0.032"></span>
+    <span class="decoration decoration--left" style="--top:10.8%; --offset:1.1%; --size:38px; --opacity:0.65;" data-response="0.025"></span>
+    <span class="decoration decoration--right" style="--top:14.2%; --offset:7.6%; --size:44px; --opacity:0.41;" data-response="0.072"></span>
+    <span class="decoration decoration--right" style="--top:17.9%; --offset:1.5%; --size:18px; --opacity:0.64;" data-response="0.074"></span>
+    <span class="decoration decoration--left" style="--top:21.6%; --offset:4.6%; --size:64px; --opacity:0.4;" data-response="0.037"></span>
+    <span class="decoration decoration--left" style="--top:24.1%; --offset:4.0%; --size:64px; --opacity:0.62;" data-response="0.075"></span>
+    <span class="decoration decoration--right" style="--top:28.1%; --offset:5.8%; --size:38px; --opacity:0.5;" data-response="0.025"></span>
+    <span class="decoration decoration--right" style="--top:31.0%; --offset:5.1%; --size:64px; --opacity:0.65;" data-response="0.063"></span>
+    <span class="decoration decoration--right" style="--top:34.7%; --offset:4.4%; --size:14px; --opacity:0.63;" data-response="0.072"></span>
+    <span class="decoration decoration--left" style="--top:38.1%; --offset:3.2%; --size:50px; --opacity:0.37;" data-response="0.07"></span>
+    <span class="decoration decoration--right" style="--top:41.2%; --offset:5.8%; --size:50px; --opacity:0.45;" data-response="0.025"></span>
+    <span class="decoration decoration--right" style="--top:44.4%; --offset:1.5%; --size:18px; --opacity:0.71;" data-response="0.072"></span>
+    <span class="decoration decoration--left" style="--top:47.8%; --offset:1.3%; --size:18px; --opacity:0.45;" data-response="0.068"></span>
+    <span class="decoration decoration--left" style="--top:51.6%; --offset:3.3%; --size:16px; --opacity:0.64;" data-response="0.059"></span>
+    <span class="decoration decoration--right" style="--top:54.1%; --offset:2.3%; --size:14px; --opacity:0.68;" data-response="0.03"></span>
+    <span class="decoration decoration--right" style="--top:58.2%; --offset:2.6%; --size:34px; --opacity:0.54;" data-response="0.047"></span>
+    <span class="decoration decoration--right" style="--top:61.5%; --offset:1.1%; --size:44px; --opacity:0.49;" data-response="0.029"></span>
+    <span class="decoration decoration--left" style="--top:64.2%; --offset:2.5%; --size:56px; --opacity:0.6;" data-response="0.064"></span>
+    <span class="decoration decoration--right" style="--top:68.0%; --offset:7.0%; --size:56px; --opacity:0.7;" data-response="0.074"></span>
+    <span class="decoration decoration--right" style="--top:71.6%; --offset:1.9%; --size:64px; --opacity:0.67;" data-response="0.044"></span>
+    <span class="decoration decoration--left" style="--top:74.4%; --offset:8.8%; --size:38px; --opacity:0.47;" data-response="0.03"></span>
+    <span class="decoration decoration--left" style="--top:77.5%; --offset:9.9%; --size:18px; --opacity:0.55;" data-response="0.054"></span>
+    <span class="decoration decoration--right" style="--top:80.9%; --offset:9.1%; --size:38px; --opacity:0.37;" data-response="0.042"></span>
+    <span class="decoration decoration--right" style="--top:84.3%; --offset:3.2%; --size:26px; --opacity:0.66;" data-response="0.032"></span>
+    <span class="decoration decoration--right" style="--top:88.1%; --offset:4.1%; --size:18px; --opacity:0.65;" data-response="0.061"></span>
+    <span class="decoration decoration--left" style="--top:91.0%; --offset:4.9%; --size:18px; --opacity:0.5;" data-response="0.056"></span>
+    <span class="decoration decoration--left" style="--top:94.2%; --offset:10.4%; --size:44px; --opacity:0.69;" data-response="0.034"></span>
+    <span class="decoration decoration--right" style="--top:98.0%; --offset:1.2%; --size:56px; --opacity:0.39;" data-response="0.04"></span>
+  </div>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header" id="site-header">
+    <div class="site-header__inner">
+      <nav class="primary-nav" aria-label="Primary">
+        <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav-list">
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+          <span class="sr-only">Menu</span>
+        </button>
+        <ul class="primary-nav__list" id="primary-nav-list">
+          <li><a class="nav-link" href="../about.html"><span class="nav-link__slash">/</span> <span class="nav-link__label" data-text="ABOUT">ABOUT</span></a></li>
+          <li><a class="nav-link nav-link--active" href="../index.html#works" aria-current="page"><span class="nav-link__slash">/</span> <span class="nav-link__label" data-text="WORKS">WORKS</span></a></li>
+          <li><a class="nav-link" href="../research.html"><span class="nav-link__slash">/</span> <span class="nav-link__label" data-text="RESEARCH">RESEARCH</span></a></li>
+          <li><a class="nav-link" href="../contact.html"><span class="nav-link__slash">/</span> <span class="nav-link__label" data-text="CONTACT">CONTACT</span></a></li>
+        </ul>
+      </nav>
+
+      <a class="logo" href="../index.html" aria-label="K.M. — home">
+        <img src="../assets/images/K.M..png" alt="" width="72" height="24">
+      </a>
+    </div>
+  </header>
+
+  <!-- reusable sparkle icon, referenced via <use> throughout this page -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="icon-sparkle" viewBox="0 0 200 200">
+      <path fill="currentColor" d="M100,4 C100,100 100,100 196,100 C100,100 100,100 100,196 C100,100 100,100 4,100 C100,100 100,100 100,4 Z"/>
+    </symbol>
+  </svg>
+
+  <main id="main-content">
+
+    <!-- ============ TITLE ============ -->
+    <section class="project-hero">
+      <h1 class="project-hero__title"><span class="project-hero__slash">//</span> TRINITY CAMPUS BUILDINGS SEARCH ENGINE (2026)</h1>
+      <p class="project-hero__link">
+        <span class="project-hero__link--placeholder">live link &gt;&gt; not yet published</span>
+      </p>
+    </section>
+
+    <!-- ============ META ============ -->
+    <section class="project-meta" aria-label="Project details">
+      <div class="project-meta__item">
+        <span class="project-meta__label"># keywords:</span>
+        <p class="project-meta__value">UX research, interface &amp; interaction design, web accessibility (WCAG), frontend, graphic design, information architecture planning</p>
+      </div>
+
+      <div class="project-meta__item project-meta__item--right">
+        <span class="project-meta__label"># tools:</span>
+        <p class="project-meta__value">Figma, Java Script, HTML, CSS, Leaflet.js, Adobe Ps, GitHub</p>
+      </div>
+    </section>
+
+    <!-- ============ PROJECT BRIEF ============ -->
+    <section class="project-quote">
+      <div class="project-quote__bar">
+        <span>/ project brief...</span>
+        <span class="project-quote__sparkles" aria-hidden="true">
+          <span class="heading-sparkle"><svg><use href="#icon-sparkle"></use></svg></span>
+          <span class="heading-sparkle"><svg><use href="#icon-sparkle"></use></svg></span>
+          <span class="heading-sparkle"><svg><use href="#icon-sparkle"></use></svg></span>
+        </span>
+      </div>
+      <div class="project-quote__body">
+        <p class="project-quote__text project-quote__text--plain">an interactive campus navigation platform (prototype, laptop adapted) designed to address the functional and aesthetic limitations of <a href="https://www.tcd.ie/Maps/map.php" target="_blank" rel="noopener noreferrer">Trinity's legacy website</a>, reimagined as an accessible, centralized building information hub.</p>
+      </div>
+    </section>
+
+    <!-- ============ PHASE 01: UX RESEARCH ============ -->
+    <section class="project-phases" aria-label="Project process">
+      <div class="phase">
+        <h2 class="phase__label">&lt; PHASE 0<span class="phase__num">1</span>: UX <br>RESEARCH &gt;</h2>
+        <div class="timeline">
+          <span class="timeline__line" aria-hidden="true"></span>
+
+          <div class="timeline__item">
+            <span class="timeline__sparkle" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span>
+            <p class="timeline__heading">the users are</p>
+            <p class="phase__desc">local &amp; international students, staff, tourists</p>
+          </div>
+
+          <div class="timeline__item">
+            <span class="timeline__sparkle" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span>
+            <p class="timeline__heading">they need</p>
+            <ul class="phase__list">
+              <li>quick, centralized access to accurate, up-to-date buildings, venues &amp; facilities information, without need to search for information externally</li>
+              <li>accessible, simple &amp; visually pleasing interface</li>
+              <li>ability to quickly identify needed landmarks</li>
+            </ul>
+          </div>
+
+          <div class="timeline__item">
+            <span class="timeline__sparkle" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span>
+            <p class="timeline__heading">but they encounter</p>
+            <ul class="phase__list">
+              <li>limited, outdated information, which forces users to waste time looking for &amp; cross-referencing information externally (other websites, social media, peers &amp; staff)</li>
+              <li>cluttered, inaccessible website layout, harsh UI elements &amp; broken interaction flows</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ PHASE 02: DEFINING STRATEGY ============ -->
+      <div class="phase">
+        <h2 class="phase__label">&lt; PHASE 0<span class="phase__num">2</span>: DEFINING STRATEGY TO REFRESH THE OLD PLATFORM &gt;</h2>
+        <div>
+          <p class="phase__desc"><strong>i/</strong> <span class="phase__subhead">information architecture &amp; enhanced ways to search</span></p>
+
+          <div class="phase-inline-media">
+            <div class="phase-inline-media__text">
+              <p class="phase__desc"><strong>Two ways to search</strong> updated information:</p>
+              <ul class="phase__list">
+                <li><strong>Interactive Map</strong> for visual search</li>
+                <li><strong>A-Z catalogue</strong> for textual search</li>
+              </ul>
+              <p class="phase__desc">Other: rich set of photos &amp; detailed entrance markers to ease orientation. Personalized search based on user category (tourist, staff, student). Save function.</p>
+            </div>
+            <div class="phase-inline-media__figure">
+              <div class="project-figure__media" style="aspect-ratio: 1497 / 1209;">
+                <button class="project-figure__zoom" type="button" aria-label="View site map diagram larger">
+                  <img src="../assets/images/t1.png" alt="Site map diagram: Welcome leads to Interactive Map and A-Z Catalogue, both leading to building subpages" loading="lazy">
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <p class="phase__desc phase__desc--spaced"><strong>ii/</strong> <span class="phase__subhead">accessibility</span></p>
+          <p class="phase__desc">Accessibility settings included &amp; WCAG compliance.</p>
+
+          <p class="phase__desc phase__desc--spaced"><strong>iii/</strong> <span class="phase__subhead">refreshing interface design</span></p>
+          <p class="phase__desc"><strong>Overall direction:</strong> shift away from &lsquo;cold&rsquo; &amp; harsh utility tool look</p>
+
+          <div class="phase__result">
+            <span class="phase__result-tag">// colours &amp; fonts</span>
+            <div class="phase__result-box">
+              <div class="brand-showcase__type-row">
+                <p class="brand-showcase__type-label">Old:</p>
+                <span class="brand-showcase__swatch brand-showcase__swatch--sm brand-showcase__swatch--named" style="background:#1669B5;"><span>#1669B5</span></span>
+                <span class="brand-showcase__swatch brand-showcase__swatch--sm brand-showcase__swatch--named brand-showcase__swatch--outline" style="background:#FFFFFF;"><span class="brand-showcase__swatch-label--dark">#FFFFFF</span></span>
+              </div>
+
+              <div class="brand-showcase__type-row brand-showcase__type-row--spaced">
+                <p class="brand-showcase__type-label">New:</p>
+                <span class="brand-showcase__swatch brand-showcase__swatch--sm brand-showcase__swatch--named" style="background:#042851;"><span>Oxford Blue<br>(#042851)</span></span>
+                <span class="brand-showcase__swatch brand-showcase__swatch--sm brand-showcase__swatch--named brand-showcase__swatch--outline" style="background:#F5F0E8;"><span class="brand-showcase__swatch-label--dark">Parchment White<br>(#F5F0E8)</span></span>
+              </div>
+
+              <div class="brand-showcase__font-showcase">
+                <div class="brand-showcase__font-group">
+                  <span class="brand-showcase__font-sample brand-showcase__font-sample--sourcesans">Source Sans Pro</span>
+                  <span class="brand-showcase__font-sample-label">Source Sans Pro</span>
+                </div>
+                <div class="brand-showcase__font-group brand-showcase__font-group--spaced">
+                  <span class="brand-showcase__font-sample brand-showcase__font-sample--crimson brand-showcase__font-sample--lg">Crimson Pro</span>
+                  <span class="brand-showcase__font-sample brand-showcase__font-sample--dmsans brand-showcase__font-sample--lg">DM Sans</span>
+                </div>
+              </div>
+
+              <p class="brand-showcase__palette-note"><span class="heading-sparkle brand-showcase__palette-sparkle" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span><strong>Oxford Blue</strong> (#042851) &mdash; deeper and more &ldquo;academic&rdquo; than the current standard blue</p>
+              <p class="brand-showcase__palette-note brand-showcase__palette-note--spaced"><span class="heading-sparkle brand-showcase__palette-sparkle" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span><strong>Parchment White</strong> (#F5F0E8) &mdash; &ldquo;library-esque&rdquo;, reduces visual glare (unlike harsh white #FFFFFF)</p>
+              <p class="brand-showcase__palette-note brand-showcase__palette-note--spaced"><span class="heading-sparkle brand-showcase__palette-sparkle" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span>more stylized font</p>
+            </div>
+          </div>
+
+          <div class="phase__result">
+            <span class="phase__result-tag">// other elements</span>
+            <div class="phase__result-box phase__result-box--dark">
+              <div class="brand-showcase__elements">
+                <figure class="project-figure">
+                  <div class="project-figure__media" style="aspect-ratio: 1374 / 1001;">
+                    <button class="project-figure__zoom" type="button" aria-label="View campanile graphic larger">
+                      <img src="../assets/images/t2.png" alt="Trinity campanile graphic — silhouette illustration" loading="lazy">
+                    </button>
+                  </div>
+                  <figcaption class="project-figure__caption project-figure__caption--on-dark">// Trinity campanile graphics</figcaption>
+                </figure>
+                <figure class="project-figure">
+                  <div class="project-figure__media" style="aspect-ratio: 1119 / 558;">
+                    <button class="project-figure__zoom" type="button" aria-label="View reference photo larger">
+                      <img src="../assets/images/t3.png" alt="Reference photo of Trinity's campanile" loading="lazy">
+                    </button>
+                  </div>
+                  <figcaption class="project-figure__caption project-figure__caption--on-dark">// reference</figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+
+          <p class="phase__desc phase__desc--spaced"><strong>iv/</strong> <span class="phase__subhead">developing with effortless data scalability in mind</span></p>
+          <p class="phase__desc">All building data is centralized in a single, clean file, allowing administrators to add, update, or remove buildings without coding knowledge, ensuring the platform scales dynamically as Trinity's campus infrastructure evolves.</p>
+        </div>
+      </div>
+
+      <!-- ============ PHASE 03: DESIGNING ============ -->
+      <div class="phase phase--stacked phase--compact-bottom">
+        <h2 class="phase__label">&lt; PHASE 0<span class="phase__num">3</span>: DESIGNING &gt;</h2>
+        <div>
+          <p class="phase__desc"><strong>i/</strong> <span class="phase__subhead">low-fidelity drafts</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-gallery project-gallery--tight-top" aria-label="Low-fidelity drafts">
+      <figure class="project-figure">
+        <div class="project-figure__media" style="aspect-ratio: 1362 / 879;">
+          <button class="project-figure__zoom" type="button" aria-label="View low-fidelity wireframe larger">
+            <img src="../assets/images/t4.png" alt="Low-fidelity wireframe — category filter panel and map" loading="lazy">
+          </button>
+        </div>
+      </figure>
+      <figure class="project-figure">
+        <div class="project-figure__media" style="aspect-ratio: 1362 / 879;">
+          <button class="project-figure__zoom" type="button" aria-label="View low-fidelity wireframe larger">
+            <img src="../assets/images/t5.png" alt="Low-fidelity wireframe — category filter expanded" loading="lazy">
+          </button>
+        </div>
+      </figure>
+      <figure class="project-figure">
+        <div class="project-figure__media" style="aspect-ratio: 1353 / 876;">
+          <button class="project-figure__zoom" type="button" aria-label="View low-fidelity wireframe larger">
+            <img src="../assets/images/t6.png" alt="Low-fidelity wireframe — A-Z catalogue" loading="lazy">
+          </button>
+        </div>
+      </figure>
+      <figure class="project-figure">
+        <div class="project-figure__media" style="aspect-ratio: 1356 / 1296;">
+          <button class="project-figure__zoom" type="button" aria-label="View low-fidelity wireframe larger">
+            <img src="../assets/images/t7.png" alt="Low-fidelity wireframe — building subpage" loading="lazy">
+          </button>
+        </div>
+      </figure>
+    </section>
+
+    <section class="project-phases">
+      <div class="phase phase--stacked phase--compact-bottom">
+        <div>
+          <p class="phase__desc"><strong>ii/</strong> <span class="phase__subhead">high-fidelity results</span> <span class="phase__subhead-note">(for full check live link)</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-gallery project-gallery--tight-top project-gallery--roomy" aria-label="Welcome screen and accessibility adjustments">
+      <figure class="project-figure">
+        <div class="project-figure__media" style="aspect-ratio: 2637 / 1419;">
+          <button class="project-figure__zoom" type="button" aria-label="View welcome screen larger">
+            <img src="../assets/images/t8.png" alt="Welcome to Trinity College Dublin building finder — welcome screen" loading="lazy">
+          </button>
+        </div>
+        <figcaption class="project-figure__caption">// welcome screen</figcaption>
+      </figure>
+      <figure class="project-figure">
+        <div class="project-figure__media" style="aspect-ratio: 2637 / 1419;">
+          <button class="project-figure__zoom" type="button" aria-label="View accessibility adjustments panel larger">
+            <img src="../assets/images/t9.png" alt="Accessibility Adjustments panel open — saturation, dark mode, font size, text spacing" loading="lazy">
+          </button>
+        </div>
+        <figcaption class="project-figure__caption">// accessibility adjustments open</figcaption>
+      </figure>
+    </section>
+
+    <section class="project-gallery project-gallery--roomy" aria-label="Interactive map">
+      <figure class="project-figure">
+        <div class="project-figure__media" style="aspect-ratio: 2667 / 1443;">
+          <button class="project-figure__zoom" type="button" aria-label="View interactive map larger">
+            <img src="../assets/images/t10.png" alt="Interactive map with the Campanile building detail popup open" loading="lazy">
+          </button>
+        </div>
+        <figcaption class="project-figure__caption">// interactive map</figcaption>
+      </figure>
+      <figure class="project-figure">
+        <div class="project-figure__media" style="aspect-ratio: 2667 / 1449;">
+          <button class="project-figure__zoom" type="button" aria-label="View interactive map larger">
+            <img src="../assets/images/t11.png" alt="Interactive map with the saved buildings panel open" loading="lazy">
+          </button>
+        </div>
+        <figcaption class="project-figure__caption">// interactive map</figcaption>
+      </figure>
+    </section>
+
+    <section class="project-gallery project-gallery--roomy" aria-label="A-Z catalogue">
+      <figure class="project-figure">
+        <div class="project-figure__media" style="aspect-ratio: 2676 / 1452;">
+          <button class="project-figure__zoom" type="button" aria-label="View A-Z catalogue larger">
+            <img src="../assets/images/t12.png" alt="A-Z catalogue list, alphabetically grouped buildings" loading="lazy">
+          </button>
+        </div>
+        <figcaption class="project-figure__caption">// A-Z catalogue</figcaption>
+      </figure>
+      <figure class="project-figure">
+        <div class="project-figure__media" style="aspect-ratio: 2727 / 1452;">
+          <button class="project-figure__zoom" type="button" aria-label="View A-Z catalogue larger">
+            <img src="../assets/images/t13.png" alt="A-Z catalogue with the category filter panel open" loading="lazy">
+          </button>
+        </div>
+        <figcaption class="project-figure__caption">// A-Z catalogue</figcaption>
+      </figure>
+    </section>
+
+    <section class="postcard-back-wrap postcard-back-wrap--left">
+      <figure class="project-figure">
+        <div class="project-figure__media" style="aspect-ratio: 2676 / 1455;">
+          <button class="project-figure__zoom" type="button" aria-label="View Samuel Beckett Theatre subpage larger">
+            <img src="../assets/images/t14.png" alt="Samuel Beckett Theatre subpage with building information open" loading="lazy">
+          </button>
+        </div>
+        <figcaption class="project-figure__caption">// a subpage with a certain building information open</figcaption>
+      </figure>
+      <p class="project-hero__link postcard-back-wrap__link">
+       
+      </p>
+    </section>
+
+    <!-- ============ PHASE 04: TESTING & IMPACT ============ -->
+    <section class="project-phases project-phases--roomy-top" aria-label="Testing and impact">
+      <div class="phase phase--separated">
+        <div>
+          <h2 class="phase__label">&lt; PHASE 0<span class="phase__num">4</span>: TESTING &amp; IMPACT &gt;</h2>
+          <p class="phase__aside"><span class="heading-sparkle phase__aside-sparkle" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span>10 participants</p>
+        </div>
+        <div class="timeline timeline--orange">
+          <span class="timeline__line" aria-hidden="true"></span>
+
+          <div class="timeline__item">
+            <span class="timeline__sparkle" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span>
+            <p class="phase__desc"><strong>100%</strong> successfully located building information on the first attempt without requiring external searches, while reporting significantly reduced search times compared to the legacy website</p>
+          </div>
+
+          <div class="timeline__item">
+            <span class="timeline__sparkle" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span>
+            <p class="phase__desc"><strong>90%</strong> found the accessibility settings valuable</p>
+          </div>
+
+          <div class="timeline__item">
+            <span class="timeline__sparkle" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span>
+            <p class="phase__desc"><strong>80%</strong> confirmed the interactive map provided a comprehensive understanding of campus geography</p>
+          </div>
+        </div>
+      </div>
+      <p class="phase__future"><strong>// future development:</strong> developing a mobile phone version</p>
+    </section>
+
+  </main>
+
+  <!-- ============ IMAGE LIGHTBOX ============ -->
+  <div class="image-modal" id="image-modal" aria-hidden="true">
+    <button class="image-modal__backdrop" type="button" aria-label="Close image"></button>
+    <div class="image-modal__panel" role="dialog" aria-modal="true" aria-label="Enlarged image">
+      <button class="image-modal__close" type="button" aria-label="Close image">&times;</button>
+      <img class="image-modal__img" src="" alt="">
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p class="site-footer__copy">© K.M. 2026. All Rights Reserved.</p>
+    <a class="site-footer__social" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="Open LinkedIn profile in a new window">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/>
+      </svg>
+    </a>
+  </footer>
+
+  <script src="../js/decorations.js" defer></script>
+  <script src="../js/scramble.js" defer></script>
+  <script src="../js/main.js" defer></script>
+  <script src="../js/timeline.js" defer></script>
+  <script src="../js/image-lightbox.js" defer></script>
+</body>
+</html>

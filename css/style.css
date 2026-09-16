@@ -1,0 +1,850 @@
+/* =========================================================================
+   K.M. PORTFOLIO — MAIN STYLESHEET
+   Table of contents:
+   1. Variables & tokens
+   2. Reset & base
+   3. Accessibility helpers
+   4. Decorative floating squares
+   5. Header & navigation
+   6. Hero section
+   7. Works / project grid
+   8. Footer
+   9. Responsive breakpoints
+   10. Reduced motion
+   ========================================================================= */
+
+/* ---------------------------------------------------------------------
+   1. VARIABLES & TOKENS
+   --------------------------------------------------------------------- */
+:root {
+  /* Colour palette */
+  --color-bg: #F8F6F0;
+  --color-orange: #EF4444;
+  --color-orange-text: #C23636; /* WCAG AA-safe variant of the brand red for small text/backgrounds */
+  --color-orange-pale: #FBEAE8;
+  --color-orange-decoration: #F6CBC7; /* much lighter tint of the brand red for the decorative squares */
+  --color-dark: #44403C;
+  --color-text: #171412;
+  --color-text-muted: #716B60;
+  --color-border: rgba(23, 20, 18, 0.1);
+  --color-white: #FFFFFF;
+
+  /* Typography */
+  --font-mono: 'JetBrains Mono', 'Courier New', Courier, monospace;
+  --font-script: 'Caveat', cursive;
+  --font-heading: 'Roboto Mono', 'Courier New', Courier, monospace;
+
+  /* Layout */
+  --container-width: 1240px;
+  --container-pad: clamp(1.25rem, 4vw, 3rem);
+  --section-gap: clamp(4rem, 9vw, 7.5rem);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.2s;
+  --transition-med: 0.4s;
+
+  /* Header */
+  --header-height: 76px;
+}
+
+/* ---------------------------------------------------------------------
+   2. RESET & BASE
+   --------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1, p, mark {
+  margin: 0;
+}
+
+mark {
+  background: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ---------------------------------------------------------------------
+   3. ACCESSIBILITY HELPERS
+   --------------------------------------------------------------------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 1rem;
+  z-index: 1000;
+  background: var(--color-dark);
+  color: var(--color-white);
+  padding: 0.6rem 1rem;
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: top var(--transition-fast) var(--ease-soft);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------------
+   4. DECORATIVE FLOATING SQUARES
+   --------------------------------------------------------------------- */
+.decorations {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.decoration {
+  position: absolute;
+  top: var(--top, 10%);
+  width: var(--size, 90px);
+  height: var(--size, 90px);
+  background: var(--color-orange-decoration);
+  opacity: var(--opacity, 0.5);
+  border-radius: 3px;
+  pointer-events: auto;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+.decoration--left {
+  left: var(--offset, 4%);
+}
+
+.decoration--right {
+  right: var(--offset, 4%);
+}
+
+/* ---------------------------------------------------------------------
+   5. HEADER & NAVIGATION
+   --------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(248, 246, 240, 0.92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-header__inner {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 1.35rem var(--container-pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--header-height);
+}
+
+.primary-nav__list {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 2.25rem);
+}
+
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--color-text);
+  padding: 0.35em 0.7em;
+  white-space: nowrap;
+  transition: background-color var(--transition-fast) var(--ease-soft),
+              color var(--transition-fast) var(--ease-soft);
+}
+
+.nav-link__slash {
+  color: var(--color-orange);
+  transition: color var(--transition-fast) var(--ease-soft);
+}
+
+.nav-link--active,
+.nav-link:hover,
+.nav-link:focus-visible {
+  background: var(--color-orange);
+  color: var(--color-white);
+}
+
+.nav-link--active .nav-link__slash,
+.nav-link:hover .nav-link__slash,
+.nav-link:focus-visible .nav-link__slash {
+  color: var(--color-white);
+}
+
+.logo img {
+  height: 24px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Mobile nav toggle (hidden on desktop) */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.nav-toggle__bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--color-text);
+  transition: transform var(--transition-fast) var(--ease-soft), opacity var(--transition-fast);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bar:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bar:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* ---------------------------------------------------------------------
+   6. HERO SECTION
+   --------------------------------------------------------------------- */
+.hero {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: clamp(3rem, 7vw, 5rem) var(--container-pad) clamp(2.5rem, 5vw, 4rem);
+  text-align: center;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 1px;
+  background: var(--color-text);
+  vertical-align: text-bottom;
+  animation: cursor-blink 0.85s step-end infinite;
+}
+
+
+
+@keyframes cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.hero__heading {
+  position: relative;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.heading-row {
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+/* Safety net: hides any leftover old standalone globe markup that may
+   still be sitting in the HTML below the heading. The real fix is to
+   delete that old <div class="hero__globe">...</div> block entirely —
+   it's been replaced by .hero__heading-globe (see below), which sits
+   behind the text instead of below it. */
+.hero__globe {
+  display: none !important;
+}
+
+/* planet placeholder — sits behind the text, rendered at full size (not
+   cropped); the two text rows simply paint on top of it in normal stacking
+   order, so it peeks through the gaps between words/lines. */
+.hero__heading-globe {
+  position: absolute;
+  top: 0%;
+  left: 57%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero__heading-globe img {
+  width: clamp(140px, 18vw, 230px);
+  height: auto;
+  display: block;
+  clip-path: inset(0 0 37% 0);
+}
+
+.heading-sparkle {
+  display: inline-flex;
+  width: 0.7em;
+  height: 0.7em;
+  margin: 0 0.2em;
+  vertical-align: middle;
+  color: var(--color-text);
+}
+
+.heading-sparkle svg {
+  width: 100%;
+  height: 100%;
+}
+
+.heading-plain {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(0.95rem, 0.8rem + 0.5vw, 1.15rem);
+  color: var(--color-text);
+  margin: 0 0.12em;
+}
+
+.heading-accent {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(0.95rem, 0.8rem + 0.5vw, 1.15rem);
+  color: var(--color-orange);
+  margin: 0 0.12em;
+}
+
+/* vertically stretched black text — same Roboto Mono, just scaled.
+   "Pouring my", "digital experiences" and "products" all share this one
+   size/weight so they read as one consistent style, matching "Pouring my". */
+.heading-stretched {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(1.2rem, 1rem + 0.8vw, 1.55rem);
+  color: var(--color-text);
+  transform: scaleY(1.4) scaleX(0.85);
+  transform-origin: center;
+  margin: 0 0.12em;
+  
+}
+
+.hero__divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem auto 2.5rem;
+  max-width: 520px;
+}
+
+.hero__divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.hero__divider-plus {
+  color: var(--color-orange-text);
+  font-size: 0.9rem;
+}
+
+.hero__bio {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: clamp(0.85rem, 0.4vw + 0.75rem, 0.95rem);
+  line-height: 2;
+  color: var(--color-text);
+}
+
+.hero__bio strong {
+  font-weight: 700;
+}
+
+/* The highlight is painted as a gradient rather than a flat background so
+   its width can be animated — it sweeps in from the left like a marker
+   being drawn across the words, once the typewriter has finished. With
+   box-decoration-break: clone each wrapped fragment gets its own
+   background box, so a mark spanning two lines draws each line from its
+   own left edge. */
+.hero__bio mark {
+  background-color: transparent;
+  background-image: linear-gradient(var(--color-orange-pale), var(--color-orange-pale));
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 0% 100%;
+  color: var(--color-text);
+  padding: 0.05em 0.35em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  transition: background-size 0.7s var(--ease-out);
+  transition-delay: var(--mark-delay, 0s);
+}
+
+.hero__bio.is-highlighted mark {
+  background-size: 100% 100%;
+}
+
+/* staggered so the three phrases read as being highlighted in turn */
+.hero__bio mark:nth-of-type(2) { --mark-delay: 0.55s; }
+.hero__bio mark:nth-of-type(3) { --mark-delay: 1.1s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__bio mark {
+    background-size: 100% 100%;
+    transition: none;
+  }
+}
+
+/* typewriter characters, revealed progressively by js/typewriter.js */
+.hero__bio .char {
+  opacity: 0;
+}
+
+.hero__bio .char.is-visible {
+  opacity: 1;
+}
+
+.hero__bio.reveal-complete .char {
+  opacity: 1;
+}
+
+/* "more about me" button */
+.btn-more {
+  display: inline-block;
+  margin-top: 2.25rem;
+  text-decoration: none;
+}
+
+.btn-more__rect {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  background: var(--color-dark);
+  color: var(--color-white);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  padding: 0.85em 1.4em;
+  transition: transform var(--transition-med) var(--ease-out);
+}
+
+.btn-more__arrow {
+  display: inline-block;
+  transition: transform var(--transition-med) var(--ease-out);
+}
+
+.btn-more:hover .btn-more__rect,
+.btn-more:focus-visible .btn-more__rect {
+  transform: scale(1.06);
+}
+
+.btn-more:hover .btn-more__arrow,
+.btn-more:focus-visible .btn-more__arrow {
+  transform: translateX(7px);
+}
+
+/* scroll cue */
+.scroll-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: clamp(3.5rem, 7vw, 6rem);
+  margin-bottom: clamp(1.5rem, 4vw, 3rem);
+  text-decoration: none;
+  color: var(--color-text-muted);
+}
+
+.scroll-cue__label {
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: lowercase;
+}
+
+.scroll-cue__chevron {
+  animation: chevron-bob 2.4s ease-in-out infinite;
+}
+
+@keyframes chevron-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* ---------------------------------------------------------------------
+   7. WORKS / PROJECT GRID
+   --------------------------------------------------------------------- */
+.works {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--container-pad) var(--section-gap);
+}
+
+.works__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  margin-bottom: var(--section-gap);
+}
+
+.project {
+  margin-bottom: var(--section-gap);
+}
+
+.works__grid .project {
+  margin-bottom: 0;
+}
+
+.project__link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.project__frame {
+  display: block;
+  position: relative;
+  width: 75%; /* smaller preview images */
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
+  transition: transform 0.5s var(--ease-out), margin-bottom 0.5s var(--ease-out);
+}
+
+.project--feature .project__frame,
+.project--feature .project__caption {
+  width: 67%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.project__link:hover .project__frame,
+.project__link:focus-visible .project__frame,
+.project__link.is-active .project__frame {
+  transform: scale(1.045);
+  margin-bottom: 28px; /* compensates the grown frame so it doesn't overlap the caption below */
+}
+
+.project__media {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-border);
+  aspect-ratio: 16 / 10;
+}
+
+.project__media--square {
+  aspect-ratio: 1 / 1;
+}
+
+.project__media--tall {
+  aspect-ratio: 8 / 9;
+}
+
+.project__media--wide {
+  aspect-ratio: 16 / 9.3;
+}
+
+.project__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* keyword tag, reveals left-to-right on hover */
+.project__tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 3;
+  max-width: calc(100% - 28px);
+  background: var(--color-white);
+  color: var(--color-orange);
+  font-size: 0.68rem;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  padding: 0.5em 0.7em;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.5s var(--ease-out);
+}
+
+.project__link:hover .project__tag,
+.project__link:focus-visible .project__tag,
+.project__link.is-active .project__tag {
+  clip-path: inset(0 0 0 0);
+  transition-delay: 0.05s;
+}
+
+/* corner brackets — live on the (unclipped) frame, outside the image edges */
+.project__corner {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.35s var(--ease-soft), transform 0.4s var(--ease-out);
+}
+
+/* the smaller, nested inner bracket for each corner */
+.project__corner::after {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 40px;
+}
+
+.project__corner--tl {
+  top: -16px;
+  left: -16px;
+  border-top: 1.5px solid var(--color-orange);
+  border-left: 1.5px solid var(--color-orange);
+  transform: translate(12px, 12px) scale(0.5);
+}
+
+.project__corner--tl::after {
+  top: 10px;
+  left: 10px;
+  border-top: 1.5px solid var(--color-orange);
+  border-left: 1.5px solid var(--color-orange);
+}
+
+.project__corner--br {
+  bottom: -16px;
+  right: -16px;
+  border-bottom: 1.5px solid var(--color-orange);
+  border-right: 1.5px solid var(--color-orange);
+  transform: translate(-12px, -12px) scale(0.5);
+}
+
+.project__corner--br::after {
+  bottom: 10px;
+  right: 10px;
+  border-bottom: 1.5px solid var(--color-orange);
+  border-right: 1.5px solid var(--color-orange);
+}
+
+.project__link:hover .project__corner,
+.project__link:focus-visible .project__corner,
+.project__link.is-active .project__corner {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+  transition-delay: 0.08s;
+}
+
+.project__caption {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.9rem;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  transition: color var(--transition-fast);
+}
+
+.project__link:hover ~ .project__caption,
+.project__link:focus-visible ~ .project__caption,
+.project__link.is-active ~ .project__caption {
+  color: var(--color-orange);
+}
+
+
+/* ---------------------------------------------------------------------
+   8. FOOTER
+   --------------------------------------------------------------------- */
+.site-footer {
+  max-width: var(--container-width);
+  margin: var(--section-gap) auto 0;
+  padding: 1.75rem var(--container-pad) 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--color-border);
+}
+
+.site-footer__copy {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.site-footer__social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--color-text);
+  color: var(--color-white);
+  transition: background var(--transition-fast) var(--ease-soft);
+}
+
+.site-footer__social:hover,
+.site-footer__social:focus-visible {
+  background: var(--color-orange);
+}
+
+/* ---------------------------------------------------------------------
+   9. RESPONSIVE BREAKPOINTS
+   --------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .decoration {
+    width: calc(var(--size, 90px) * 0.75);
+    height: calc(var(--size, 90px) * 0.75);
+  }
+}
+
+@media (max-width: 768px) {
+  .works__grid {
+    grid-template-columns: 1fr;
+    gap: clamp(2.5rem, 8vw, 3.5rem);
+  }
+
+  .heading-accent,
+  .heading-plain,
+  .heading-stretched {
+    font-size: clamp(0.9rem, 3.2vw, 1.2rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .primary-nav {
+    position: relative;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .primary-nav__list {
+    position: absolute;
+    top: calc(100% + 1.35rem);
+    left: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    padding: 1rem 1.25rem;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity var(--transition-fast) var(--ease-soft),
+                transform var(--transition-fast) var(--ease-soft),
+                visibility var(--transition-fast);
+  }
+
+  .primary-nav__list.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .site-header__inner {
+    padding-block: 1rem;
+  }
+
+  .hero {
+    padding-top: 2.5rem;
+  }
+
+  .decoration {
+    width: calc(var(--size, 90px) * 0.5);
+    height: calc(var(--size, 90px) * 0.5);
+  }
+}
+
+@media (max-width: 420px) {
+  .hero__bio {
+    line-height: 1.85;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   10. REDUCED MOTION
+   --------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .scroll-cue__chevron {
+    animation: none;
+  }
+
+  .project__frame,
+  .project__tag,
+  .project__corner,
+  .btn-more__arrow,
+  .btn-more__rect,
+  .nav-toggle__bar,
+  .primary-nav__list {
+    transition-duration: 0.01ms !important;
+  }
+
+  .hero__bio .char {
+    transition: none;
+  }
+}
+

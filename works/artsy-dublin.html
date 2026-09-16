@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artsy Dublin Website (2026) — K.M.</title>
+  <meta name="description" content="Artsy Dublin — a web platform for discovering Dublin's local arts and performance events, with personalised recommendations and lightweight social event-buddy finding, by K.M.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Roboto+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/project.css?v=91">
+</head>
+<body>
+
+  <!-- Decorative floating squares — identical markup/behaviour to other pages -->
+  <div class="decorations" aria-hidden="true" id="decorations">
+    <span class="decoration decoration--left" style="--top:1.0%; --offset:5.4%; --size:56px; --opacity:0.6;" data-response="0.04"></span>
+    <span class="decoration decoration--right" style="--top:4.9%; --offset:7.0%; --size:38px; --opacity:0.4;" data-response="0.038"></span>
+    <span class="decoration decoration--right" style="--top:7.5%; --offset:10.0%; --size:64px; --opacity:0.64;" data-response="0.032"></span>
+    <span class="decoration decoration--left" style="--top:10.8%; --offset:1.1%; --size:38px; --opacity:0.65;" data-response="0.025"></span>
+    <span class="decoration decoration--right" style="--top:14.2%; --offset:7.6%; --size:44px; --opacity:0.41;" data-response="0.072"></span>
+    <span class="decoration decoration--right" style="--top:17.9%; --offset:1.5%; --size:18px; --opacity:0.64;" data-response="0.074"></span>
+    <span class="decoration decoration--left" style="--top:21.6%; --offset:4.6%; --size:64px; --opacity:0.4;" data-response="0.037"></span>
+    <span class="decoration decoration--left" style="--top:24.1%; --offset:4.0%; --size:64px; --opacity:0.62;" data-response="0.075"></span>
+    <span class="decoration decoration--right" style="--top:28.1%; --offset:5.8%; --size:38px; --opacity:0.5;" data-response="0.025"></span>
+    <span class="decoration decoration--right" style="--top:31.0%; --offset:5.1%; --size:64px; --opacity:0.65;" data-response="0.063"></span>
+    <span class="decoration decoration--right" style="--top:34.7%; --offset:4.4%; --size:14px; --opacity:0.63;" data-response="0.072"></span>
+    <span class="decoration decoration--left" style="--top:38.1%; --offset:3.2%; --size:50px; --opacity:0.37;" data-response="0.07"></span>
+    <span class="decoration decoration--right" style="--top:41.2%; --offset:5.8%; --size:50px; --opacity:0.45;" data-response="0.025"></span>
+    <span class="decoration decoration--right" style="--top:44.4%; --offset:1.5%; --size:18px; --opacity:0.71;" data-response="0.072"></span>
+    <span class="decoration decoration--left" style="--top:47.8%; --offset:1.3%; --size:18px; --opacity:0.45;" data-response="0.068"></span>
+    <span class="decoration decoration--left" style="--top:51.6%; --offset:3.3%; --size:16px; --opacity:0.64;" data-response="0.059"></span>
+    <span class="decoration decoration--right" style="--top:54.1%; --offset:2.3%; --size:14px; --opacity:0.68;" data-response="0.03"></span>
+    <span class="decoration decoration--right" style="--top:58.2%; --offset:2.6%; --size:34px; --opacity:0.54;" data-response="0.047"></span>
+    <span class="decoration decoration--right" style="--top:61.5%; --offset:1.1%; --size:44px; --opacity:0.49;" data-response="0.029"></span>
+    <span class="decoration decoration--left" style="--top:64.2%; --offset:2.5%; --size:56px; --opacity:0.6;" data-response="0.064"></span>
+    <span class="decoration decoration--right" style="--top:68.0%; --offset:7.0%; --size:56px; --opacity:0.7;" data-response="0.074"></span>
+    <span class="decoration decoration--right" style="--top:71.6%; --offset:1.9%; --size:64px; --opacity:0.67;" data-response="0.044"></span>
+    <span class="decoration decoration--left" style="--top:74.4%; --offset:8.8%; --size:38px; --opacity:0.47;" data-response="0.03"></span>
+    <span class="decoration decoration--left" style="--top:77.5%; --offset:9.9%; --size:18px; --opacity:0.55;" data-response="0.054"></span>
+    <span class="decoration decoration--right" style="--top:80.9%; --offset:9.1%; --size:38px; --opacity:0.37;" data-response="0.042"></span>
+    <span class="decoration decoration--right" style="--top:84.3%; --offset:3.2%; --size:26px; --opacity:0.66;" data-response="0.032"></span>
+    <span class="decoration decoration--right" style="--top:88.1%; --offset:4.1%; --size:18px; --opacity:0.65;" data-response="0.061"></span>
+    <span class="decoration decoration--left" style="--top:91.0%; --offset:4.9%; --size:18px; --opacity:0.5;" data-response="0.056"></span>
+    <span class="decoration decoration--left" style="--top:94.2%; --offset:10.4%; --size:44px; --opacity:0.69;" data-response="0.034"></span>
+    <span class="decoration decoration--right" style="--top:98.0%; --offset:1.2%; --size:56px; --opacity:0.39;" data-response="0.04"></span>
+  </div>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header" id="site-header">
+    <div class="site-header__inner">
+      <nav class="primary-nav" aria-label="Primary">
+        <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav-list">
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+          <span class="sr-only">Menu</span>
+        </button>
+        <ul class="primary-nav__list" id="primary-nav-list">
+          <li><a class="nav-link" href="../about.html"><span class="nav-link__slash">/</span> <span class="nav-link__label" data-text="ABOUT">ABOUT</span></a></li>
+          <li><a class="nav-link nav-link--active" href="../index.html#works" aria-current="page"><span class="nav-link__slash">/</span> <span class="nav-link__label" data-text="WORKS">WORKS</span></a></li>
+          <li><a class="nav-link" href="../research.html"><span class="nav-link__slash">/</span> <span class="nav-link__label" data-text="RESEARCH">RESEARCH</span></a></li>
+          <li><a class="nav-link" href="../contact.html"><span class="nav-link__slash">/</span> <span class="nav-link__label" data-text="CONTACT">CONTACT</span></a></li>
+        </ul>
+      </nav>
+
+      <a class="logo" href="../index.html" aria-label="K.M. — home">
+        <img src="../assets/images/K.M..png" alt="" width="72" height="24">
+      </a>
+    </div>
+  </header>
+
+  <!-- reusable sparkle icon, referenced via <use> throughout this page -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="icon-sparkle" viewBox="0 0 200 200">
+      <path fill="currentColor" d="M100,4 C100,100 100,100 196,100 C100,100 100,100 100,196 C100,100 100,100 4,100 C100,100 100,100 100,4 Z"/>
+    </symbol>
+  </svg>
+
+  <main id="main-content">
+
+    <!-- ============ TITLE ============ -->
+    <section class="project-hero">
+      <h1 class="project-hero__title"><span class="project-hero__slash">//</span> ARTSY DUBLIN WEBSITE (2026)</h1>
+      <p class="project-hero__link">
+        <span class="project-hero__link--placeholder">live link &gt;&gt; not yet published</span>
+      </p>
+    </section>
+
+    <!-- ============ META ============ -->
+    <section class="project-meta" aria-label="Project details">
+      <div class="project-meta__item">
+        <span class="project-meta__label"># role:</span>
+        <p class="project-meta__value">UX designer &amp; researcher; information architecture, user-to-user (U2U) &amp; user-to-many users (U2M) interaction planning; backend <br>&amp; frontend developer; databases planning</p>
+      </div>
+
+      <div class="project-meta__item project-meta__item--right">
+        <span class="project-meta__label"># other collaborators:</span>
+        <p class="project-meta__value">Ge You, Pojui Hsiao, Qi Yin, Sengul Cagdal, Tianyi Sun</p>
+      </div>
+
+      <div class="project-meta__item">
+        <span class="project-meta__label"># tools:</span>
+        <p class="project-meta__value">Node.js, React.js, MySQL, Firebase, Socket.io (WebSockets), APIs, GitHub, Figma</p>
+      </div>
+    </section>
+
+    <!-- ============ PROJECT BRIEF ============ -->
+    <section class="project-quote">
+      <div class="project-quote__bar">
+        <span>/ Artsy Dublin is...</span>
+        <span class="project-quote__sparkles" aria-hidden="true">
+          <span class="heading-sparkle"><svg><use href="#icon-sparkle"></use></svg></span>
+          <span class="heading-sparkle"><svg><use href="#icon-sparkle"></use></svg></span>
+          <span class="heading-sparkle"><svg><use href="#icon-sparkle"></use></svg></span>
+        </span>
+      </div>
+      <div class="project-quote__body">
+        <p class="project-quote__text project-quote__text--plain">a web platform (laptop &amp; phone adapted) for discovering Dublin&rsquo;s local performance and arts events &mdash; such as music, theatre, film, and more &mdash; with personalised recommendations based on users&rsquo; interests. It combines event discovery with lightweight social connection, helping people find what&rsquo;s worth seeing and others to experience it with.</p>
+      </div>
+    </section>
+
+    <!-- ============ PHASE 01: UX RESEARCH ============ -->
+    <section class="project-phases" aria-label="Project process">
+      <div class="phase">
+        <h2 class="phase__label">&lt; PHASE 0<span class="phase__num">1</span>: UX <br>RESEARCH &gt;</h2>
+        <div class="timeline">
+          <span class="timeline__line" aria-hidden="true"></span>
+
+          <div class="timeline__item">
+            <span class="timeline__sparkle" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span>
+            <p class="timeline__heading">the users are</p>
+            <div class="timeline__box-row">
+              <div class="timeline__box"><strong>Dublin's art-goers</strong> who want to stay on top of art and performance that actually suits their taste</div>
+              <div class="timeline__box"><strong>Solo attendees</strong> who want to share cultural experiences but don't have a ready-made group to go with</div>
+            </div>
+          </div>
+
+          <div class="timeline__item">
+            <span class="timeline__sparkle" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span>
+            <p class="timeline__heading">they need</p>
+            <p class="phase__desc">a single trustworthy place to browse cultural events they can actually rely on, recommendations that reflect their real interests, and a low-pressure way to find company for an event without committing to a long-term group</p>
+          </div>
+
+          <div class="timeline__item">
+            <span class="timeline__sparkle" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span>
+            <p class="timeline__heading">but they encounter</p>
+            <p class="phase__desc">general-purpose platforms (such as Eventbrite) that fall short for this niche:</p>
+            <p class="phase__desc phase__desc--spaced"><strong>i/ inaccurate tagging</strong> &mdash; user-generated events carry wrong or misleading category labels</p>
+            <p class="phase__desc"><strong>ii/ weak recommendation algorithms</strong> &mdash; no nuanced interest profile is built</p>
+            <p class="phase__desc"><strong>iii/ no spontaneous social layer</strong> &mdash; existing social features are built for long-term groups, not lightweight, event-specific buddy-finding</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ PHASE 02: CREATING SOLUTION ============ -->
+      <div class="phase">
+        <h2 class="phase__label">&lt; PHASE 0<span class="phase__num">2</span>: CREATING SOLUTION &gt;</h2>
+        <div>
+          <div class="result-grid">
+            <div class="phase__result">
+              <span class="phase__result-tag">// search &amp; discovery</span>
+              <div class="phase__result-box">
+                <ul class="icon-list">
+                  <li><span class="heading-sparkle icon-list__bullet" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span><strong>sorting events by genre and time</strong>, sourced live from reputable venue/institution APIs</li>
+                  <li><span class="heading-sparkle icon-list__bullet" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span>clear, reliable <strong>information sourced from APIs</strong> replaces user-generated tagging</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="phase__result">
+              <span class="phase__result-tag">// personalisation</span>
+              <div class="phase__result-box">
+                <ul class="icon-list">
+                  <li><span class="heading-sparkle icon-list__bullet" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span><strong>art event diary</strong> that is formulated by logging attended events with a reflection, rating, and photo; doubles as a keepsake and the basis for the recommendation profile</li>
+                  <li><span class="heading-sparkle icon-list__bullet" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span>tailored <strong>&ldquo;For You&rdquo; feed</strong> where recommendations are built from interest profile, diary history, and what connections are attending</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="phase__result phase__result--full">
+            <span class="phase__result-tag">// social layer</span>
+            <div class="phase__result-box">
+              <ul class="icon-list">
+                <li><span class="heading-sparkle icon-list__bullet" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span><strong>messaging</strong> between users</li>
+                <li><span class="heading-sparkle icon-list__bullet" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span><strong>posting</strong>, such as sharing updates &amp; reflections tied to events; interacting with posts, such as commenting &amp; liking</li>
+                <li><span class="heading-sparkle icon-list__bullet" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span><strong>event buddy matching</strong> &mdash; user sees who else is going to an event and sends a &ldquo;join me&rdquo; request, no long-term commitment required</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ PHASE 03: DESIGNING APPEARANCE ============ -->
+      <div class="phase">
+        <h2 class="phase__label">&lt; PHASE 0<span class="phase__num">3</span>: DESIGNING APPEARANCE &gt;</h2>
+        <div>
+          <p class="phase__desc"><span class="accent-word">WARM</span> &amp; <span class="accent-word">TACTILE</span> &amp; <span class="accent-word">CULTURAL</span> &mdash; not another cold tech app or generic ticketing platform</p>
+
+          <div class="palette-trio">
+            <figure class="palette-trio__item">
+              <span class="brand-showcase__swatch brand-showcase__swatch--named brand-showcase__swatch--outline" style="background:#FBF4E9;"><span class="brand-showcase__swatch-label--dark">#FBF4E9</span></span>
+              <figcaption class="palette-trio__caption">background</figcaption>
+            </figure>
+            <figure class="palette-trio__item">
+              <span class="brand-showcase__swatch brand-showcase__swatch--named" style="background:#5A3713;"><span>deep brown<br>#5A3713</span></span>
+              <figcaption class="palette-trio__caption">primary</figcaption>
+            </figure>
+            <figure class="palette-trio__item">
+              <span class="brand-showcase__swatch brand-showcase__swatch--named" style="background:#10755A;"><span>forest green<br>#10755A</span></span>
+              <figcaption class="palette-trio__caption">accents</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ INTERFACE EXAMPLES ============ -->
+    <div class="project-section-label">
+      <h2 class="project-synopsis__heading project-synopsis__heading--first">some interface examples the website (for full see live link above)</h2>
+    </div>
+
+    <section class="project-gallery" aria-label="Home page and all events">
+      <figure class="project-figure">
+        <div class="project-figure__media" style="aspect-ratio: 2502 / 6024;">
+          <button class="project-figure__zoom" type="button" aria-label="View home page larger">
+            <img src="../assets/images/ad1.png" alt="Artsy Dublin home page — &ldquo;Find your next event&rdquo; hero, event grid, and upcoming-events calendar" loading="lazy">
+          </button>
+        </div>
+        <figcaption class="project-figure__caption">// home page</figcaption>
+      </figure>
+      <figure class="project-figure">
+        <div class="project-figure__media" style="aspect-ratio: 2247 / 5325;">
+          <button class="project-figure__zoom" type="button" aria-label="View all events page larger">
+            <img src="../assets/images/ad2.png" alt="All Events page (mobile), category filters and film grid" loading="lazy">
+          </button>
+        </div>
+        <figcaption class="project-figure__caption">// all events (mobile)</figcaption>
+      </figure>
+    </section>
+
+    <section class="postcard-back-wrap">
+      <figure class="project-figure" style="max-width: 680px;">
+        <div class="project-figure__media" style="aspect-ratio: 2247 / 1155;">
+          <button class="project-figure__zoom" type="button" aria-label="View welcome / log in screen larger">
+            <img src="../assets/images/ad4.png" alt="Welcome / log in screen with a still-life flower painting" loading="lazy">
+          </button>
+        </div>
+        <figcaption class="project-figure__caption">// welcome / log in</figcaption>
+      </figure>
+    </section>
+
+    <section class="project-gallery" aria-label="Popular reviews and post detail">
+      <figure class="project-figure">
+        <div class="project-figure__media" style="aspect-ratio: 2436 / 1809;">
+          <button class="project-figure__zoom" type="button" aria-label="View popular reviews larger">
+            <img src="../assets/images/ad3.png" alt="Popular reviews, colour-coded review cards" loading="lazy">
+          </button>
+        </div>
+        <figcaption class="project-figure__caption">// popular reviews</figcaption>
+      </figure>
+      <figure class="project-figure">
+        <div class="project-figure__media" style="aspect-ratio: 2466 / 2250;">
+          <button class="project-figure__zoom" type="button" aria-label="View post and comments larger">
+            <img src="../assets/images/ad5.png" alt="Reviewed-event post with comments" loading="lazy">
+          </button>
+        </div>
+        <figcaption class="project-figure__caption">// post &amp; comments</figcaption>
+      </figure>
+    </section>
+
+    <section class="project-gallery" aria-label="Popular reviews list and profile">
+      <figure class="project-figure">
+        <div class="project-figure__media" style="aspect-ratio: 2262 / 2811;">
+          <button class="project-figure__zoom" type="button" aria-label="View popular reviews list larger">
+            <img src="../assets/images/ad6.png" alt="Popular reviews, list view with peaceful/noisy filter" loading="lazy">
+          </button>
+        </div>
+        <figcaption class="project-figure__caption">// popular reviews (list view)</figcaption>
+      </figure>
+      <figure class="project-figure">
+        <div class="project-figure__media" style="aspect-ratio: 2265 / 3102;">
+          <button class="project-figure__zoom" type="button" aria-label="View profile page larger">
+            <img src="../assets/images/ad7.png" alt="User profile — interests and journey" loading="lazy">
+          </button>
+        </div>
+        <figcaption class="project-figure__caption">// profile</figcaption>
+      </figure>
+    </section>
+
+    <section class="project-quote" aria-label="Future development">
+      <p class="phase__future"><strong>future development:</strong> including feature &lsquo;community-led events&rsquo;, which will allow to promote informal gatherings such as art-topic presentation nights, debate clubs, and collaborative viewing parties</p>
+    </section>
+
+  </main>
+
+  <!-- ============ IMAGE LIGHTBOX ============ -->
+  <div class="image-modal" id="image-modal" aria-hidden="true">
+    <button class="image-modal__backdrop" type="button" aria-label="Close image"></button>
+    <div class="image-modal__panel" role="dialog" aria-modal="true" aria-label="Enlarged image">
+      <button class="image-modal__close" type="button" aria-label="Close image">&times;</button>
+      <img class="image-modal__img" src="" alt="">
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p class="site-footer__copy">© K.M. 2026. All Rights Reserved.</p>
+    <a class="site-footer__social" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="Open LinkedIn profile in a new window">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/>
+      </svg>
+    </a>
+  </footer>
+
+  <script src="../js/decorations.js" defer></script>
+  <script src="../js/scramble.js" defer></script>
+  <script src="../js/main.js" defer></script>
+  <script src="../js/timeline.js" defer></script>
+  <script src="../js/image-lightbox.js" defer></script>
+</body>
+</html>
