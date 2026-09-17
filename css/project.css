@@ -283,6 +283,8 @@
 
 .project-section-label .project-synopsis__heading {
   margin: 0;
+  font-style: normal;
+  font-weight: 400;
 }
 
 /* pull the labeled row up close to its label instead of the usual gap
@@ -532,10 +534,6 @@
   aspect-ratio: 4 / 5;
   position: relative;
   overflow: hidden;
-  /* the default --color-border (10% opacity) reads fine against a plain
-     cream image edge, but disappears against a busier or similarly-toned
-     screenshot — darker so it stays visible regardless of the image */
-  border: 1px solid rgba(23, 20, 18, 0.22);
 }
 
 .project-figure--wide .project-figure__media {
@@ -562,6 +560,16 @@
   object-fit: contain;
   object-position: center;
   transition: transform var(--transition-med) var(--ease-out);
+}
+
+/* Artsy Dublin-only: a visible stroke around every screenshot, plus
+   object-fit: cover (rather than the sitewide default contain) so the
+   stroke always hugs the photo with zero letterbox gap — scoped here
+   rather than added to the shared rule above, since no other page asked
+   for this treatment */
+.page-artsy-dublin .project-figure__media img {
+  object-fit: cover;
+  border: 1px solid rgba(23, 20, 18, 0.22);
 }
 
 .project-figure__zoom:hover img,
@@ -982,10 +990,10 @@
   color: var(--color-text-muted);
 }
 
-/* on the Trinity page this note follows the font showcase as its own
+/* on the Trinity page this note follows the colours/fonts row as its own
    block (rather than sitting inline beside a palette, as on the WinRAR
    page) — give it room to breathe above it */
-.brand-showcase__font-showcase + .brand-showcase__palette-note {
+.brand-showcase__colours-fonts-row + .brand-showcase__palette-note {
   margin-top: 1.75rem;
 }
 
@@ -1236,14 +1244,28 @@
   color: var(--color-text-muted);
 }
 
-/* Old:/New: font pairs, stacked below the colour swatches and set well
-   apart from each other, matching the reference wireframe: a big bold
-   demo of each typeface with a smaller sample of its pair directly under
-   it, rather than running inline beside the colour chips */
+/* colour swatches on the left, font samples on the right — sitting side
+   by side rather than stacked, matching the reference wireframe */
+.brand-showcase__colours-fonts-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(3rem, 9vw, 6rem);
+}
+
+.brand-showcase__swatches-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Old:/New: font pairs, set well apart from each other: a big bold demo
+   of each typeface with a smaller sample of its pair directly under it */
 .brand-showcase__font-showcase {
   display: flex;
   flex-direction: column;
-  padding-top: clamp(1.5rem, 3.5vw, 2.25rem);
+  /* nudges the Source Sans Pro sample down so it sits level with the
+     Old: colour row rather than hugging the top of the taller column */
+  padding-top: 1rem;
 }
 
 .brand-showcase__font-group {
@@ -1253,7 +1275,9 @@
 }
 
 .brand-showcase__font-group--spaced {
-  margin-top: clamp(2.5rem, 6vw, 3.5rem);
+  /* tighter than before so the Crimson Pro/DM Sans pair lands level with
+     the New: colour row instead of sitting below it */
+  margin-top: 2rem;
 }
 
 .brand-showcase__font-sample--lg {
@@ -1369,6 +1393,7 @@
 .timeline__box {
   flex: 1 1 220px;
   border: 1px solid var(--color-border);
+  background: #FBF9F6;
   padding: 1rem 1.25rem;
   font-size: 0.85rem;
   line-height: 1.75;
