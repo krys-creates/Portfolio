@@ -579,6 +579,13 @@ button:focus-visible {
   margin-right: auto;
 }
 
+/* MODU's feature frame runs the full edge-to-edge width of the section
+   (matching the two-column row below it) rather than the standard 67% */
+.project--feature-wide .project__frame,
+.project--feature-wide .project__caption {
+  width: 84%;
+}
+
 .project__link:hover .project__frame,
 .project__link:focus-visible .project__frame,
 .project__link.is-active .project__frame {

@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Roboto+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=2">
 </head>
 <body>
 <div class="decorations" aria-hidden="true" id="decorations">
@@ -171,6 +171,23 @@
 
     <!-- ============ WORKS ============ -->
     <section class="works" id="works" aria-label="Selected works">
+
+      <!-- Featured / full-width project — wider than the standard feature
+           frame, spanning the same edge-to-edge width as the two-column
+           row below it -->
+      <article class="project project--feature project--feature-wide">
+        <a class="project__link" href="works/modu.html" aria-describedby="p0-caption">
+          <span class="project__frame">
+            <span class="project__corner project__corner--tl" aria-hidden="true"></span>
+            <span class="project__corner project__corner--br" aria-hidden="true"></span>
+            <span class="project__media">
+              <span class="project__tag" aria-hidden="true">UX/UI, gamification, cognitive accessibility, product design</span>
+              <img src="assets/images/modu-prev.png" alt="MODU gamified furniture-building app shown across tablet and phone mockups" loading="lazy">
+            </span>
+          </span>
+        </a>
+        <p class="project__caption" id="p0-caption">// MODU &mdash; a gamified application with focus on cognitive accessibility, 2026</p>
+      </article>
 
       <!-- Featured / full-width project -->
       <article class="project project--feature">
