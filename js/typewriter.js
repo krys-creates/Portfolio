@@ -91,7 +91,7 @@
 }
 
   var index = 0;
-  var safetyTimer = setTimeout(finish, SAFETY_TIMEOUT_MS);
+  var safetyTimer;
 
   function revealNext() {
     if (index >= total) {
@@ -113,5 +113,16 @@
     setTimeout(revealNext, delay);
   }
 
-  revealNext();
+  // the typing starts once the LOADING screen has lifted, so it isn't
+  // played out behind it
+  function start() {
+    safetyTimer = setTimeout(finish, SAFETY_TIMEOUT_MS);
+    revealNext();
+  }
+
+  if (document.documentElement.classList.contains('is-loading')) {
+    document.addEventListener('pageloader:done', start, { once: true });
+  } else {
+    start();
+  }
 })();

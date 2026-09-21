@@ -25,5 +25,14 @@
   // A timer rather than requestAnimationFrame: rAF never fires while the
   // tab is backgrounded, which would leave the marks stuck at zero width.
   // The short beat also lets the page settle before the marker sweeps.
-  setTimeout(highlight, 250);
+  function start() {
+    setTimeout(highlight, 250);
+  }
+
+  // wait for the LOADING screen to lift, so the sweep isn't hidden behind it
+  if (document.documentElement.classList.contains('is-loading')) {
+    document.addEventListener('pageloader:done', start, { once: true });
+  } else {
+    start();
+  }
 })();

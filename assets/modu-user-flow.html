@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MODU User Flow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+<!-- ===== STANDALONE PREVIEW ONLY: page chrome. Not needed when pasted into the site. ===== -->
+<style>
+  body{
+    margin:0;
+    background:var(--color-bg,#F8F6F0);
+    padding:clamp(1.25rem,4vw,3rem);
+  }
+  .preview-wrap{ max-width:1054px; margin:0 auto; }
+</style>
+
+<!-- ===== COPY FROM HERE: 1/2 — styles (all selectors are prefixed .uf) ===== -->
+<style>
+  .uf{
+    --uf-ink:var(--color-text,#171412);
+    --uf-dark:var(--color-dark,#44403C);
+    --uf-muted:var(--color-text-muted,#716B60);
+    --uf-red-text:var(--color-orange-text,#C23636);
+    --uf-red-pale:var(--color-orange-decoration,#F6CBC7);
+    --uf-card:#FFFFFF;
+    margin:0;
+    color:var(--uf-ink);
+    font-family:var(--font-mono,'JetBrains Mono','Courier New',monospace);
+    container-type:inline-size;
+  }
+  .uf ol{ list-style:none; margin:0; padding:0; }
+
+  /* stages: one column on narrow embeds, four across on wide ones */
+  .uf-stages{ display:grid; grid-template-columns:minmax(0,1fr); row-gap:3.25rem; }
+  .uf-stage{ position:relative; }
+
+  .uf-stage__title{
+    margin:0 0 1.6rem;
+    padding-bottom:.65rem;
+    border-bottom:2px solid var(--uf-dark);
+    font-family:var(--font-heading,'Roboto Mono','Courier New',monospace);
+    font-size:1rem;
+    font-weight:700;
+    letter-spacing:.03em;
+    line-height:1.3;
+    text-wrap:balance;
+  }
+  .uf-stage__n{ color:var(--uf-red-text); }
+
+  /* arrow from one stage to the next */
+  .uf-stage:not(:last-child)::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:-2.4rem;
+    width:12px;
+    height:18px;
+    margin-left:-6px;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='18' viewBox='0 0 12 18' fill='none' stroke='%23C23636' stroke-width='1.8' stroke-linecap='square'%3E%3Cpath d='M6 1v15M1 11l5 5 5-5'/%3E%3C/svg%3E") no-repeat center / contain;
+  }
+
+  /* steps inside a stage */
+  .uf-step{ position:relative; padding-bottom:2.1rem; }
+  .uf-step:last-child{ padding-bottom:0; }
+  .uf-step:not(:last-child)::after{
+    content:"";
+    position:absolute;
+    left:1.1rem;
+    bottom:.35rem;
+    width:12px;
+    height:18px;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='18' viewBox='0 0 12 18' fill='none' stroke='%23C23636' stroke-width='1.8' stroke-linecap='square'%3E%3Cpath d='M6 1v15M1 11l5 5 5-5'/%3E%3C/svg%3E") no-repeat center / contain;
+  }
+
+  .uf-card{
+    background:var(--uf-card);
+    border:1px solid var(--uf-dark);
+    box-shadow:4px 4px 0 var(--uf-red-pale);
+    padding:.95rem 1.1rem 1.05rem;
+  }
+  .uf-card__id{
+    display:block;
+    margin-bottom:.45rem;
+    color:var(--uf-red-text);
+    font-size:.68rem;
+    font-weight:700;
+    letter-spacing:.08em;
+  }
+  .uf-card p{ margin:0; font-size:.84rem; line-height:1.55; }
+
+  .uf-note{
+    margin:.65rem 0 0;
+    padding-inline:.2rem;
+    color:var(--uf-muted);
+    font-size:.72rem;
+    line-height:1.55;
+  }
+
+  @container (min-width: 880px){
+    .uf-stages{ grid-template-columns:repeat(4,minmax(0,1fr)); column-gap:2.5rem; row-gap:0; }
+    .uf-stage:not(:last-child)::after{
+      left:auto;
+      right:-1.6rem;
+      bottom:auto;
+      top:.3rem;
+      width:18px;
+      height:12px;
+      margin-left:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='12' viewBox='0 0 18 12' fill='none' stroke='%23C23636' stroke-width='1.8' stroke-linecap='square'%3E%3Cpath d='M1 6h15M11 1l5 5-5 5'/%3E%3C/svg%3E");
+    }
+  }
+</style>
+</head>
+<body>
+<div class="preview-wrap">
+
+<!-- ===== COPY FROM HERE: 2/2 — markup ===== -->
+<figure class="uf" role="group" aria-label="MODU user flow: onboarding, virtual room, assembling, be social">
+  <ol class="uf-stages">
+
+    <li class="uf-stage">
+      <h3 class="uf-stage__title"><span class="uf-stage__n">1.</span> ONBOARDING</h3>
+      <ol class="uf-steps">
+        <li class="uf-step">
+          <div class="uf-card"><span class="uf-card__id">1.1</span><p>Onboarding questionnare</p></div>
+          <p class="uf-note">*Answers received help to map possible cognitive profiles and define users` struggles in assembling</p>
+        </li>
+        <li class="uf-step">
+          <div class="uf-card"><span class="uf-card__id">1.2</span><p>Based on answers, the mode of the best suit is suggested to the user</p></div>
+          <p class="uf-note">*The suggested mode can always be changed or modified</p>
+        </li>
+        <li class="uf-step">
+          <div class="uf-card"><span class="uf-card__id">1.3</span><p>Practical tutorial - user gets to assemble their very first furniture</p></div>
+          <p class="uf-note">*Skippable</p>
+        </li>
+      </ol>
+    </li>
+
+    <li class="uf-stage">
+      <h3 class="uf-stage__title"><span class="uf-stage__n">2.</span> VIRTUAL ROOM</h3>
+      <ol class="uf-steps">
+        <li class="uf-step">
+          <div class="uf-card"><span class="uf-card__id">2.1</span><p>Place your 1st built furniture and get familiar with room environment</p></div>
+        </li>
+        <li class="uf-step">
+          <div class="uf-card"><span class="uf-card__id">2.2</span><p>Customizing the room a bit more  - place default/base items</p></div>
+          <p class="uf-note">*Default items amount is not big, user will find themselves willing to customize the room further, for which they need currency and certain levels reached, which is achieved when user assmebles</p>
+        </li>
+      </ol>
+    </li>
+
+    <li class="uf-stage">
+      <h3 class="uf-stage__title"><span class="uf-stage__n">3.</span> ASSEMBLING</h3>
+      <ol class="uf-steps">
+        <li class="uf-step">
+          <div class="uf-card"><span class="uf-card__id">3.1</span><p>In Furniture Catalogue, pick a furniture to assemble. Different difficulty levels and corresponding rewards</p></div>
+        </li>
+        <li class="uf-step">
+          <div class="uf-card"><span class="uf-card__id">3.2</span><p>Process of assembly, personalized and accessible based on your needs (identified in onboarding)</p></div>
+        </li>
+        <li class="uf-step">
+          <div class="uf-card"><span class="uf-card__id">3.3</span><p>After assembled - receive rewards, XP, new LVL. Place an assembled item in the room</p></div>
+        </li>
+      </ol>
+    </li>
+
+    <li class="uf-stage">
+      <h3 class="uf-stage__title"><span class="uf-stage__n">4.</span> BE SOCIAL</h3>
+      <ol class="uf-steps">
+        <li class="uf-step">
+          <div class="uf-card"><span class="uf-card__id">4.1</span><p>Visit other players rooms, rate rooms, make friends</p></div>
+        </li>
+      </ol>
+    </li>
+
+  </ol>
+</figure>
+<!-- ===== COPY TO HERE ===== -->
+
+</div>
+</body>
+</html>

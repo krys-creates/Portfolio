@@ -583,7 +583,7 @@ button:focus-visible {
    (matching the two-column row below it) rather than the standard 67% */
 .project--feature-wide .project__frame,
 .project--feature-wide .project__caption {
-  width: 84%;
+  width: 78%;
 }
 
 .project__link:hover .project__frame,
@@ -969,3 +969,135 @@ button:focus-visible {
   }
 }
 
+
+/* ---------------------------------------------------------------------
+   11b. PAGE LOADER ("// LOADING..." screen)
+   Markup is built by js/page-loader.js, loaded at the top of <body>.
+   --------------------------------------------------------------------- */
+html.is-loading {
+  overflow: hidden;
+}
+
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  background: var(--color-bg);
+  transition: opacity 0.45s var(--ease-soft), visibility 0.45s;
+}
+
+.page-loader.is-done {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* the same red + black four-point pair as the flourish on the About page */
+.page-loader__stars {
+  position: relative;
+  width: 84px;
+  height: 84px;
+}
+
+.page-loader__star {
+  position: absolute;
+  display: block;
+}
+
+.page-loader__star--big {
+  top: 50%;
+  left: 50%;
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  color: var(--color-orange);
+  animation: loader-turn 2.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.page-loader__star--small {
+  top: 6px;
+  left: 4px;
+  width: 20px;
+  height: 20px;
+  color: var(--color-text);
+  animation: loader-turn 2.4s cubic-bezier(0.65, 0, 0.35, 1) infinite reverse;
+  animation-delay: 0.2s;
+}
+
+.page-loader__text {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--color-text);
+}
+
+.page-loader__slash {
+  color: var(--color-orange);
+}
+
+.page-loader__dots span {
+  opacity: 0.15;
+  animation: loader-dot 1.2s ease-in-out infinite;
+}
+
+.page-loader__dots span:nth-child(2) { animation-delay: 0.2s; }
+.page-loader__dots span:nth-child(3) { animation-delay: 0.4s; }
+
+.page-loader__bar {
+  position: relative;
+  display: block;
+  width: 168px;
+  height: 2px;
+  overflow: hidden;
+  background: var(--color-border);
+}
+
+.page-loader__bar-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 42%;
+  background: var(--color-orange);
+  animation: loader-slide 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes loader-turn {
+  from { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(45deg) scale(0.82); }
+  to   { transform: rotate(90deg) scale(1); }
+}
+
+@keyframes loader-dot {
+  0%, 100% { opacity: 0.15; }
+  40%      { opacity: 1; }
+}
+
+@keyframes loader-slide {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(240%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-loader__star,
+  .page-loader__dots span,
+  .page-loader__bar-fill {
+    animation: none;
+  }
+
+  .page-loader__dots span {
+    opacity: 1;
+  }
+
+  .page-loader__bar-fill {
+    width: 100%;
+  }
+
+  .page-loader {
+    transition-duration: 0.01ms;
+  }
+}

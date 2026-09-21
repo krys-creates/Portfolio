@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MODU Navigation Flow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+<!-- ===== STANDALONE PREVIEW ONLY: page chrome. Not needed when pasted into the site. ===== -->
+<style>
+  body{
+    margin:0;
+    background:var(--color-bg,#F8F6F0);
+    padding:clamp(1.25rem,4vw,3rem);
+  }
+  .preview-wrap{ max-width:1054px; margin:0 auto; }
+</style>
+
+<!-- ===== COPY FROM HERE: 1/2 — styles (all selectors are prefixed .ufn) ===== -->
+<style>
+  .ufn{
+    --ufn-bg:var(--color-bg,#F8F6F0);
+    --ufn-ink:var(--color-text,#171412);
+    --ufn-dark:var(--color-dark,#44403C);
+    --ufn-muted:var(--color-text-muted,#716B60);
+    --ufn-red:var(--color-orange-text,#C23636);
+    --ufn-red-pale:var(--color-orange-decoration,#F6CBC7);
+    --ufn-line:rgba(23,20,18,.32);
+    margin:0;
+    color:var(--ufn-ink);
+    font-family:var(--font-mono,'JetBrains Mono','Courier New',monospace);
+  }
+  .ufn__scroll{ overflow-x:auto; padding-bottom:.5rem; }
+  .ufn__svg{ display:block; width:100%; min-width:900px; height:auto; }
+
+  .ufn .t-title{ font-family:var(--font-heading,'Roboto Mono','Courier New',monospace); font-size:14.5px; font-weight:700; fill:var(--ufn-ink); text-anchor:middle; }
+  .ufn .t-title--lg{ font-size:16px; }
+  .ufn .t-sub{ font-size:11px; fill:var(--ufn-muted); text-anchor:middle; }
+  .ufn .k-hub .t-title{ fill:#FFFFFF; }
+  .ufn .k-hub .t-sub{ fill:#E6E1D6; }
+
+  .ufn .t-sec{ font-size:11.5px; letter-spacing:.08em; fill:var(--ufn-muted); }
+  .ufn .t-sec__k{ font-weight:700; fill:var(--ufn-red); }
+  .ufn .t-edge,.ufn .t-note,.ufn .t-cap{ font-size:11.5px; paint-order:stroke; stroke:var(--ufn-bg); stroke-width:6px; stroke-linejoin:round; }
+  .ufn .t-edge{ fill:var(--ufn-red); font-weight:500; }
+  .ufn .t-note{ fill:var(--ufn-muted); font-style:italic; }
+  .ufn .t-cap{ fill:var(--ufn-muted); }
+
+  .ufn .bd{ stroke-width:1.25; }
+  .ufn .k-onb .bd{ fill:#FFFFFF; stroke:var(--ufn-line); }
+  .ufn .k-route .bd,.ufn .k-tut .bd{ fill:#FFFFFF; stroke:var(--ufn-dark); }
+  .ufn .k-tut .bd{ fill:#ECE7DA; }
+  .ufn .sh{ fill:var(--ufn-red-pale); }
+  .ufn .k-hub .bd{ fill:var(--ufn-dark); stroke:var(--ufn-dark); }
+  .ufn .ghost{ fill:none; stroke:var(--ufn-dark); stroke-opacity:.35; stroke-width:1.25; }
+  .ufn .k-modal .bd{ fill:rgba(255,255,255,.55); stroke:var(--ufn-muted); stroke-dasharray:5 4; }
+  .ufn .handle{ fill:#E4DFD3; stroke:var(--ufn-muted); stroke-width:1; }
+
+  .ufn .e-push{ fill:none; stroke:var(--ufn-red); stroke-width:1.75; }
+  .ufn .e-over{ fill:none; stroke:var(--ufn-muted); stroke-width:1.5; stroke-dasharray:5 4; }
+  .ufn .e-return{ fill:none; stroke:var(--ufn-muted); stroke-width:1.9; stroke-dasharray:.1 6; stroke-linecap:round; }
+  .ufn .e-dot{ fill:var(--ufn-muted); }
+  .ufn .ah-red{ fill:var(--ufn-red); }
+  .ufn .ah-muted{ fill:var(--ufn-muted); }
+
+  .ufn__legend{
+    list-style:none; margin:1.6rem 0 0; padding:1.1rem 0 0;
+    border-top:1px solid var(--ufn-line);
+    display:flex; flex-wrap:wrap; gap:.9rem 2.4rem;
+    font-size:.82rem; line-height:1.4;
+  }
+  .ufn__legend li{ display:flex; align-items:center; gap:.7rem; }
+  .ufn__legend strong{ font-weight:700; }
+  .ufn__legend .txt{ color:var(--ufn-muted); }
+  .ufn__legend .txt strong{ color:var(--ufn-ink); }
+  .ufn__sw{ flex:none; width:34px; height:18px; box-sizing:border-box; }
+  .ufn__sw--onb{ background:#FFFFFF; border:1.25px solid var(--ufn-line); }
+  .ufn__sw--hub{ background:var(--ufn-dark); border:1.25px solid var(--ufn-dark); }
+  .ufn__sw--route{ background:#FFFFFF; border:1.25px solid var(--ufn-dark); box-shadow:3px 3px 0 var(--ufn-red-pale); }
+  .ufn__sw--modal{ background:rgba(255,255,255,.55); border:1.25px dashed var(--ufn-muted); }
+  .ufn__ln{ flex:none; width:34px; height:0; border-top:2px solid var(--ufn-red); }
+  .ufn__ln--over{ border-top:2px dashed var(--ufn-muted); }
+</style>
+</head>
+<body>
+<div class="preview-wrap">
+
+<!-- ===== COPY FROM HERE: 2/2 — markup ===== -->
+<figure class="ufn">
+  <div class="ufn__scroll">
+    <svg class="ufn__svg" viewBox="-2 -2 1112 768" xmlns="http://www.w3.org/2000/svg" aria-label="MODU navigation flow">
+      <defs>
+        <marker id="ufn-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path class="ah-red" d="M0 0L10 5L0 10z"/></marker>
+        <marker id="ufn-ah-m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path class="ah-muted" d="M0 0L10 5L0 10z"/></marker>
+      </defs>
+<text class="t-sec" x="0" y="16"><tspan class="t-sec__k">FIRST-RUN ONBOARDING</tspan> · once per account</text>
+<text class="t-sec" x="0" y="340"><tspan class="t-sec__k">CORE APP</tspan> · every session</text>
+<path class="e-push" d="M132 70H198" marker-end="url(#ufn-ah)"/>
+<path class="e-push" d="M330 70H352" marker-end="url(#ufn-ah)"/>
+<path class="e-push" d="M484 70H506" marker-end="url(#ufn-ah)"/>
+<path class="e-push" d="M638 70H660" marker-end="url(#ufn-ah)"/>
+<path class="e-push" d="M792 70H814" marker-end="url(#ufn-ah)"/>
+<path class="e-push" d="M946 70H968" marker-end="url(#ufn-ah)"/>
+<path class="e-push" d="M1034 104V176" marker-end="url(#ufn-ah)"/>
+<path class="e-push" d="M1034 244V296H620V372" marker-end="url(#ufn-ah)"/>
+<path class="e-return" d="M66 104V296H480V372" marker-end="url(#ufn-ah-m)"/>
+<path class="e-push" d="M270 418H400" marker-end="url(#ufn-ah)" marker-start="url(#ufn-ah)"/>
+<path class="e-push" d="M700 418H830" marker-end="url(#ufn-ah)" marker-start="url(#ufn-ah)"/>
+<path class="e-push" d="M185 452V544" marker-end="url(#ufn-ah)"/>
+<path class="e-push" d="M270 578H430V464" marker-end="url(#ufn-ah)"/>
+<path class="e-over" d="M550 464V642M265 642H835"/>
+<circle class="e-dot" cx="550" cy="642" r="3.2"/>
+<path class="e-over" d="M265 642V672" marker-end="url(#ufn-ah-m)"/>
+<path class="e-over" d="M455 642V672" marker-end="url(#ufn-ah-m)"/>
+<path class="e-over" d="M645 642V672" marker-end="url(#ufn-ah-m)"/>
+<path class="e-over" d="M835 642V672" marker-end="url(#ufn-ah-m)"/>
+<g class="ufn-node k-onb">
+<rect class="bd" x="0" y="36" width="132" height="68"/>
+<text class="t-title" x="66.0" y="66">Landing</text>
+<text class="t-sub" x="66.0" y="86">index.tsx</text>
+</g>
+<g class="ufn-node k-onb">
+<rect class="bd" x="198" y="36" width="132" height="68"/>
+<text class="t-title" x="264.0" y="66">Auth</text>
+<text class="t-sub" x="264.0" y="86">sign in / up</text>
+</g>
+<g class="ufn-node k-onb">
+<rect class="bd" x="352" y="36" width="132" height="68"/>
+<text class="t-title" x="418.0" y="66">Create</text>
+<text class="t-sub" x="418.0" y="86">Account</text>
+</g>
+<g class="ufn-node k-onb">
+<rect class="bd" x="506" y="36" width="132" height="68"/>
+<text class="t-title" x="572.0" y="66">Loading</text>
+<text class="t-sub" x="572.0" y="86">preparing session</text>
+</g>
+<g class="ufn-node k-onb">
+<rect class="bd" x="660" y="36" width="132" height="68"/>
+<text class="t-title" x="726.0" y="66">Voice Intro</text>
+<text class="t-sub" x="726.0" y="86">spoken welcome</text>
+</g>
+<g class="ufn-node k-onb">
+<rect class="bd" x="814" y="36" width="132" height="68"/>
+<text class="t-title" x="880.0" y="66">Questionnaire</text>
+<text class="t-sub" x="880.0" y="86">weighted mapping</text>
+</g>
+<g class="ufn-node k-onb">
+<rect class="bd" x="968" y="36" width="132" height="68"/>
+<text class="t-title" x="1034.0" y="66">Avatar Rec.</text>
+<text class="t-sub" x="1034.0" y="86">assigns profile</text>
+</g>
+<g class="ufn-node k-tut">
+<rect class="sh" x="868" y="180" width="236" height="68"/>
+<rect class="bd" x="864" y="176" width="236" height="68"/>
+<text class="t-title" x="982.0" y="206">Tutorial</text>
+<text class="t-sub" x="982.0" y="226">first build, per-profile script</text>
+</g>
+<g class="ufn-node k-hub">
+<rect class="ghost" x="409" y="381" width="300" height="92"/>
+<rect class="bd" x="400" y="372" width="300" height="92"/>
+<text class="t-title t-title--lg" x="550.0" y="403">Room</text>
+<text class="t-sub" x="550.0" y="426">persistent hub — never unmounted</text>
+<text class="t-sub" x="550.0" y="444">(home)/room.tsx</text>
+</g>
+<g class="ufn-node k-route">
+<rect class="sh" x="104" y="388" width="170" height="68"/>
+<rect class="bd" x="100" y="384" width="170" height="68"/>
+<text class="t-title" x="185.0" y="414">Catalogue</text>
+<text class="t-sub" x="185.0" y="434">choose furniture</text>
+</g>
+<g class="ufn-node k-route">
+<rect class="sh" x="834" y="388" width="170" height="68"/>
+<rect class="bd" x="830" y="384" width="170" height="68"/>
+<text class="t-title" x="915.0" y="414">Visit</text>
+<text class="t-sub" x="915.0" y="434">a friend's room</text>
+</g>
+<g class="ufn-node k-route">
+<rect class="sh" x="104" y="548" width="170" height="68"/>
+<rect class="bd" x="100" y="544" width="170" height="68"/>
+<text class="t-title" x="185.0" y="574">Play</text>
+<text class="t-sub" x="185.0" y="594">3D assembly build</text>
+</g>
+<g class="ufn-node k-modal">
+<rect class="handle" x="194" y="676" width="142" height="10" rx="2"/>
+<rect class="bd" x="180" y="686" width="170" height="68"/>
+<text class="t-title" x="265.0" y="716">Settings</text>
+<text class="t-sub" x="265.0" y="736">profile, display, audio</text>
+</g>
+<g class="ufn-node k-modal">
+<rect class="handle" x="384" y="676" width="142" height="10" rx="2"/>
+<rect class="bd" x="370" y="686" width="170" height="68"/>
+<text class="t-title" x="455.0" y="716">Profile</text>
+<text class="t-sub" x="455.0" y="736">account overview</text>
+</g>
+<g class="ufn-node k-modal">
+<rect class="handle" x="574" y="676" width="142" height="10" rx="2"/>
+<rect class="bd" x="560" y="686" width="170" height="68"/>
+<text class="t-title" x="645.0" y="716">Shop</text>
+<text class="t-sub" x="645.0" y="736">spend points</text>
+</g>
+<g class="ufn-node k-modal">
+<rect class="handle" x="764" y="676" width="142" height="10" rx="2"/>
+<rect class="bd" x="750" y="686" width="170" height="68"/>
+<text class="t-title" x="835.0" y="716">Inventory</text>
+<text class="t-sub" x="835.0" y="736">owned furniture</text>
+</g>
+<text class="t-edge" x="165" y="62" text-anchor="middle">new user</text>
+<text class="t-edge" x="335" y="408" text-anchor="middle">browse</text>
+<text class="t-edge" x="765" y="408" text-anchor="middle">visit friend</text>
+<text class="t-edge" x="199" y="502">select item</text>
+<text class="t-edge" x="286" y="568">finish / exit build</text>
+<text class="t-note" x="80" y="200">returning user</text>
+<text class="t-cap" x="566" y="626">opens as an overlay — Room stays mounted underneath</text>
+    </svg>
+  </div>
+  <ul class="ufn__legend">
+    <li><span class="ufn__sw ufn__sw--onb" aria-hidden="true"></span><span class="txt"><strong>Onboarding step</strong> — linear, first run only</span></li>
+    <li><span class="ufn__sw ufn__sw--hub" aria-hidden="true"></span><span class="txt"><strong>Persistent hub</strong> — Room, never unmounted</span></li>
+    <li><span class="ufn__sw ufn__sw--route" aria-hidden="true"></span><span class="txt"><strong>Full-screen route</strong> — pushed on the stack</span></li>
+    <li><span class="ufn__sw ufn__sw--modal" aria-hidden="true"></span><span class="txt"><strong>Modal overlay</strong> — layers on top, doesn't unmount</span></li>
+    <li><span class="ufn__ln" aria-hidden="true"></span><span class="txt">push navigation</span></li>
+    <li><span class="ufn__ln ufn__ln--over" aria-hidden="true"></span><span class="txt">opens as overlay</span></li>
+  </ul>
+</figure>
+<!-- ===== COPY TO HERE ===== -->
+
+</div>
+</body>
+</html>

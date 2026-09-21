@@ -166,16 +166,41 @@
     positionAllConnectors();
   }
 
-  layoutTools();
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(layoutTools);
+  // Re-layout at most once per frame, however many things ask for it, so
+  // the lines follow the boxes while a window is still being dragged
+  // instead of catching up after a delay.
+  var layoutQueued = false;
+  function scheduleLayout() {
+    if (layoutQueued) return;
+    layoutQueued = true;
+    requestAnimationFrame(function () {
+      layoutQueued = false;
+      layoutTools();
+    });
   }
 
-  var resizeTimer;
-  window.addEventListener('resize', function () {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(layoutTools, 150);
-  });
+  layoutTools();
+  window.addEventListener('load', scheduleLayout);
+  window.addEventListener('resize', scheduleLayout);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(scheduleLayout);
+  }
+
+  // Anything that changes a box's or label's size — window resize, browser
+  // zoom, a late-loading font or icon, a media-query layout switch — re-runs
+  // the layout, not just the window's resize event.
+  if ('ResizeObserver' in window) {
+    var observer = new ResizeObserver(scheduleLayout);
+    var diagram = document.querySelector('.tools-diagram');
+    if (diagram) observer.observe(diagram);
+    groups.forEach(function (group) {
+      var box = group.querySelector('.tool-group__box');
+      var label = group.querySelector('.tool-group__label-text');
+      observer.observe(group);
+      if (box) observer.observe(box);
+      if (label) observer.observe(label);
+    });
+  }
 
   // Lines and labels are static — no scroll-triggered reveal, no typing.
   groups.forEach(function (group) {

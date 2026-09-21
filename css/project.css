@@ -18,6 +18,9 @@
    11. Brand showcase panel (WinRAR re-brand)
    12. Timeline + Trinity campus search components
    13. Artsy Dublin components (box rows, icon lists, swatch trio)
+   13b. MODU components (mascot hero, media rows, mode cards, stat cards)
+   13c. Low-fi wireframe carousel (MODU)
+   13d. "Still coding" page (Surveillance Engine)
    14. Disclaimer line
    15. Responsive breakpoints
    16. Reduced motion
@@ -575,6 +578,35 @@
 .project-figure__zoom:hover img,
 .project-figure__zoom:focus-visible img {
   transform: scale(1.03);
+}
+
+/* small "click to expand" badge sitting just above a zoomable image's
+   top-right corner (not over the image, so it never covers a diagram's own
+   labels) — for dense diagrams where it isn't obvious they open larger */
+.project-figure__hint {
+  display: flex;
+  align-items: center;
+  gap: 0.45em;
+  width: fit-content;
+  margin: 0 0 0.5rem auto;
+  background: var(--color-white);
+  color: var(--color-orange-text);
+  border: 1px solid var(--color-border);
+  padding: 0.3em 0.7em;
+  font-size: 0.68rem;
+  line-height: 1.5;
+}
+
+/* for an image with its own empty band along the top (the information
+   architecture diagram): tuck the badge into that band, so it sits close to
+   the diagram instead of floating well above it. The band scales with the
+   image, so the badge stays inside it at every width. */
+.project-figure__hint--overlap {
+  position: relative;
+  z-index: 1;
+  margin-right: 0.6rem;
+  margin-bottom: -2.25rem;
+  pointer-events: none;
 }
 
 .project-figure__caption {
@@ -1479,6 +1511,659 @@
 }
 
 /* ---------------------------------------------------------------------
+   13b. MODU COMPONENTS (mascot + speech bubble hero, photo/room media
+        rows, 4 support modes, stat cards)
+   --------------------------------------------------------------------- */
+
+/* hero: mascot + "downloadable app is to be launched soon" speech bubble on
+   the left, title + website link on the right (title/link keep their
+   normal right alignment) */
+.project-hero--modu {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.project-hero__main {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* the role label follows straight on from the mascot, rather than after the
+   usual gap a title-only hero leaves */
+.project-hero--modu + .project-meta {
+  padding-top: clamp(0.75rem, 1.5vw, 1rem);
+}
+
+.modu-mascot {
+  position: relative;
+  flex: 0 0 auto;
+  width: 250px;
+  margin-top: clamp(0.5rem, 2vw, 1.25rem);
+}
+
+.modu-mascot__bubble {
+  position: relative;
+  display: block;
+  width: 230px;
+  height: 118px;
+}
+
+.modu-mascot__bubble svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.modu-mascot__bubble path {
+  fill: none;
+  stroke: #8A857D;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.modu-mascot__text {
+  position: absolute;
+  /* fills the bubble's oval body (not its tail) so the two lines sit dead
+     centre, both horizontally and vertically */
+  top: 51px;
+  left: 18px;
+  right: 2px;
+  transform: translateY(-50%);
+  text-align: center;
+  margin: 0;
+  font-style: italic;
+  font-size: 0.72rem;
+  line-height: 2;
+  color: var(--color-text-muted);
+}
+
+.modu-mascot__img {
+  width: 112px;
+  margin-top: -6px;
+}
+
+/* rows of media that keep one shared height while their widths differ —
+   each figure's flex share (--w) and inline aspect-ratio both come from
+   its real width:height, so the heights come out equal */
+.media-row {
+  display: flex;
+  gap: clamp(0.5rem, 1.2vw, 0.75rem);
+  align-items: flex-start;
+}
+
+.media-row > .project-figure {
+  flex: var(--w, 1) 1 0;
+  min-width: 0;
+  margin: 0;
+}
+
+.media-strip {
+  max-width: var(--project-content-width);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 5vw, 3.5rem) var(--container-pad) 0;
+}
+
+.media-strip + .project-phases {
+  padding-top: clamp(2rem, 4vw, 3rem);
+}
+
+/* the three showcase photos, framed by a thin orange corner bracket at the
+   top-left and bottom-right; each bracket's corner is marked by a tall
+   four-point sparkle */
+.media-strip__inner {
+  position: relative;
+  width: 87%;
+  margin: 0 auto;
+}
+
+.media-strip__inner::before,
+.media-strip__inner::after {
+  content: '';
+  position: absolute;
+  width: 20%;
+  aspect-ratio: 1;
+  border: 0 solid var(--color-orange);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.media-strip__inner::before {
+  top: -7px;
+  left: -9px;
+  border-top-width: 1px;
+  border-left-width: 1px;
+}
+
+.media-strip__inner::after {
+  bottom: -7px;
+  right: -6px;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+}
+
+/* centred exactly on each bracket's corner point */
+.media-strip__sparkle {
+  position: absolute;
+  z-index: 3;
+  width: 24px;
+  height: 34px;
+  color: var(--color-orange);
+  pointer-events: none;
+}
+
+.media-strip__sparkle svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.media-strip__sparkle--tl {
+  top: -24px;
+  left: -21px;
+}
+
+.media-strip__sparkle--br {
+  bottom: -24px;
+  right: -18px;
+}
+
+.project-quote__text + .project-quote__text {
+  margin-top: 1.2em;
+}
+
+/* MODU's phase content: a labelled sub-heading (i/ ii/ …) followed by media
+   sits a little further from the text above than plain .phase__desc rows */
+.phase__media {
+  /* zeroes <figure>'s default side margins too, so IA / flow diagrams
+     fill the phase's content column */
+  margin: 1.5rem 0 0;
+}
+
+/* the four support modes (Felix / Lumi / Sparky / Pebble) — one bordered
+   card each: companion avatar, name, mode label, one-line description */
+.mode-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.6rem, 1.5vw, 1rem);
+  margin-top: 1.25rem;
+}
+
+.mode-card {
+  border: 1px solid var(--color-border);
+  background: #FBF9F6;
+  padding: 1.25rem 0.85rem 1.15rem;
+  text-align: center;
+  min-width: 0;
+}
+
+/* the companions are full-body art on a transparent background, so they
+   sit uncropped in a square rather than inside a circular crop */
+.mode-card__avatar {
+  width: 104px;
+  margin: 0 auto 0.75rem;
+}
+
+.mode-card__name {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.mode-card__tag {
+  margin: 0.25rem 0 0.75rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-orange-text);
+}
+
+.mode-card__text {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+/* "40+ / 40+ / 5" wireframing stats */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  margin-top: 1.25rem;
+}
+
+.stat-card {
+  border: 1px solid var(--color-border);
+  background: #FBF9F6;
+  padding: 1.1rem 1.2rem 1.25rem;
+  min-width: 0;
+}
+
+.stat-card__num {
+  margin: 0;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-orange);
+}
+
+.stat-card__num sup {
+  font-size: 0.45em;
+  vertical-align: top;
+  position: relative;
+  top: 0.15em;
+  margin-left: 0.08em;
+}
+
+.stat-card__text {
+  margin: 0.9rem 0 0;
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+/* ---------------------------------------------------------------------
+   13c. LOW-FI WIREFRAME CAROUSEL (MODU) — arrow-driven slides, dots, and
+        an expanded viewer with its own prev/next arrows
+   --------------------------------------------------------------------- */
+.phase__lead {
+  margin: 2.5rem 0 1rem;
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* small explanatory note trailing a lead-in label, e.g. "(uses plenty of
+   placeholders …)" after ">> some high-fidelity wireframes" */
+.phase__lead-note {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+/* .wf-carousel is the size container: its width sets --ratio-driven height
+   for the viewport, so the frame smoothly re-fits each slide's own shape */
+.wf-carousel {
+  container-type: inline-size;
+  --i: 0;
+  --ratio: 1.2221;
+}
+
+.wf-carousel__stage {
+  position: relative;
+}
+
+/* the wireframe sheets are all drawn on this exact grey, so any spare
+   space around a slide simply reads as part of the sheet */
+.wf-carousel__viewport {
+  position: relative;
+  overflow: hidden;
+  background: #444444;
+  height: calc(100cqw / var(--ratio));
+  transition: height 0.45s var(--ease-out);
+}
+
+.wf-carousel__track {
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transform: translateX(calc(var(--i) * -100%));
+  transition: transform 0.45s var(--ease-out);
+}
+
+.wf-carousel__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  height: 100%;
+}
+
+.wf-carousel__open {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: zoom-in;
+}
+
+.wf-carousel__open img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.wf-carousel__hint {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  margin: 0;
+  pointer-events: none;
+}
+
+/* solid triangle arrows in the site's dark, sitting just outside the frame
+   at mid-height; the previous arrow only appears once there's a slide to go
+   back to, the next one disappears on the last slide */
+.wf-carousel__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 56px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-dark);
+  cursor: pointer;
+  transition: color var(--transition-fast, 0.2s) ease, opacity 0.2s ease;
+}
+
+.wf-carousel__arrow--prev {
+  left: -38px;
+}
+
+.wf-carousel__arrow--next {
+  right: -38px;
+}
+
+.wf-carousel__arrow svg {
+  display: block;
+  width: 20px;
+  height: 50px;
+  fill: currentColor;
+}
+
+.wf-carousel__arrow--prev svg {
+  transform: scaleX(-1);
+}
+
+.wf-carousel__arrow:hover,
+.wf-carousel__arrow:focus-visible {
+  color: var(--color-orange);
+}
+
+.wf-carousel__arrow:disabled {
+  visibility: hidden;
+}
+
+.wf-carousel__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-top: 0.15rem;
+}
+
+.wf-carousel__dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.wf-carousel__dot::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-dark);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.wf-carousel__dot[aria-current="true"]::before {
+  background: var(--color-orange);
+}
+
+.wf-carousel__dot:hover::before,
+.wf-carousel__dot:focus-visible::before {
+  transform: scale(1.25);
+}
+
+/* expanded viewer: the site's lightbox look, plus prev/next arrows and a
+   slide counter; wider/taller than the single-image lightbox because the
+   wireframes carry small text */
+.wf-modal .image-modal__panel,
+.wf-modal .image-modal__img {
+  max-width: min(94vw, 1500px);
+  max-height: 92vh;
+}
+
+.wf-modal__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 64px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-white);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.wf-modal__nav--prev {
+  left: -58px;
+}
+
+.wf-modal__nav--next {
+  right: -58px;
+}
+
+.wf-modal__nav svg {
+  display: block;
+  width: 22px;
+  height: 56px;
+  fill: currentColor;
+}
+
+.wf-modal__nav--prev svg {
+  transform: scaleX(-1);
+}
+
+.wf-modal__nav:hover,
+.wf-modal__nav:focus-visible {
+  color: var(--color-orange);
+}
+
+.wf-modal__nav:disabled {
+  visibility: hidden;
+}
+
+.wf-modal__count {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1.75rem;
+  margin: 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #F8F6F0;
+}
+
+/* not enough side gutter for outside arrows below this width — tuck them
+   into the frame's edges instead */
+@media (max-width: 999px) {
+  .wf-carousel__arrow {
+    width: 30px;
+    height: 48px;
+    background: rgba(68, 64, 60, 0.6);
+    color: var(--color-white);
+  }
+
+  .wf-carousel__arrow--prev {
+    left: 6px;
+  }
+
+  .wf-carousel__arrow--next {
+    right: 6px;
+  }
+
+  .wf-carousel__arrow svg {
+    width: 14px;
+    height: 34px;
+  }
+}
+
+@media (max-width: 900px) {
+  .wf-modal__nav {
+    width: 36px;
+    height: 56px;
+    background: rgba(23, 20, 18, 0.6);
+  }
+
+  .wf-modal__nav--prev {
+    left: 6px;
+  }
+
+  .wf-modal__nav--next {
+    right: 6px;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   13d. "STILL CODING" PAGE (works/surveillance-engine.html) — a single
+        centred message for a project page that isn't built yet
+   --------------------------------------------------------------------- */
+.coming-soon {
+  max-width: var(--project-content-width);
+  min-height: 62vh;
+  margin: 0 auto;
+  padding: clamp(4rem, 10vw, 7rem) var(--container-pad);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+/* the same red + black four-point pair used on the About page and the
+   loading screen */
+.coming-soon__stars {
+  position: relative;
+  width: 84px;
+  height: 84px;
+}
+
+.coming-soon__star {
+  position: absolute;
+  display: block;
+}
+
+.coming-soon__star--big {
+  top: 50%;
+  left: 50%;
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  color: var(--color-orange);
+}
+
+.coming-soon__star--small {
+  top: 6px;
+  left: 4px;
+  width: 20px;
+  height: 20px;
+  color: var(--color-text);
+}
+
+.coming-soon__label {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.coming-soon__title {
+  margin: 0;
+  max-width: 22ch;
+  font-size: clamp(1.6rem, 3.2vw + 0.8rem, 2.9rem);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--color-text);
+}
+
+.coming-soon__title--wide {
+  max-width: 30ch;
+}
+
+.coming-soon__oops {
+  color: var(--color-orange);
+}
+
+.coming-soon__text {
+  margin: 0;
+  font-size: clamp(0.9rem, 0.4vw + 0.8rem, 1.05rem);
+  line-height: 1.8;
+  color: var(--color-text);
+}
+
+.coming-soon__mail {
+  color: var(--color-orange-text);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+.coming-soon__mail:hover,
+.coming-soon__mail:focus-visible {
+  color: var(--color-orange);
+}
+
+.coming-soon__title .typewriter-cursor {
+  margin-left: 0.15em;
+  width: 3px;
+  height: 0.95em;
+}
+
+.coming-soon__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  margin-top: 0.75rem;
+  padding: 0.85em 1.5em;
+  background: var(--color-dark);
+  color: var(--color-white);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: background-color var(--transition-fast) var(--ease-soft);
+}
+
+.coming-soon__back:hover,
+.coming-soon__back:focus-visible {
+  background: var(--color-orange);
+}
+
+.coming-soon__back-arrow {
+  display: inline-block;
+  transition: transform var(--transition-med) var(--ease-out);
+}
+
+.coming-soon__back:hover .coming-soon__back-arrow,
+.coming-soon__back:focus-visible .coming-soon__back-arrow {
+  transform: translateX(-5px);
+}
+
+/* ---------------------------------------------------------------------
    14. DISCLAIMER LINE
    --------------------------------------------------------------------- */
 .project-disclaimer {
@@ -1536,9 +2221,52 @@
     grid-template-columns: 1fr;
   }
 
+  /* minmax(0, 1fr) rather than 1fr: a plain 1fr column won't shrink below its
+     content's minimum width, which let wide content push the page sideways
+     on phones */
   .phase {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 0.75rem;
+  }
+
+  .phase__desc {
+    overflow-wrap: anywhere;
+  }
+
+  .result-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project-hero--modu {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .mode-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stat-row {
+    grid-template-columns: 1fr;
+  }
+
+  .media-strip__inner {
+    width: 100%;
+  }
+
+  .media-row {
+    flex-direction: column;
+  }
+
+  .media-row > .project-figure {
+    flex: none;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .mode-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1553,7 +2281,9 @@
   .image-modal__panel,
   .project-figure__media img,
   .timeline__line,
-  .timeline__item {
+  .timeline__item,
+  .wf-carousel__viewport,
+  .wf-carousel__track {
     transition: none !important;
   }
 }
