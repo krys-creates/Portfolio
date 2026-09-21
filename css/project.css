@@ -1807,6 +1807,17 @@
   transition: height 0.45s var(--ease-out);
 }
 
+/* the final-UI sheets are transparent PNGs meant to sit on the page's own
+   cream, so their frame (and the expanded viewer behind them) is cream
+   rather than the grey the wireframe sheets are drawn on */
+.wf-carousel--light .wf-carousel__viewport {
+  background: var(--color-bg);
+}
+
+.wf-modal--light .image-modal__img {
+  background: var(--color-bg);
+}
+
 .wf-carousel__track {
   display: flex;
   height: 100%;

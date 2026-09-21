@@ -123,6 +123,9 @@
     lastTrigger = trigger;
     modal.querySelector('.image-modal__panel').setAttribute(
       'aria-label', (api.root.getAttribute('aria-label') || 'Wireframes') + ', enlarged');
+    // transparent sheets need a light backing in the viewer, or their dark
+    // text disappears against the dark backdrop
+    modal.classList.toggle('wf-modal--light', api.root.classList.contains('wf-carousel--light'));
     showInModal();
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
