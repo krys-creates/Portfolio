@@ -1483,6 +1483,21 @@
   font-weight: 700;
 }
 
+/* bigger sparkle bullets, for a standalone list (MODU's accessibility
+   highlights) rather than one tucked inside a result box */
+.icon-list--large li {
+  padding-left: 2.2em;
+}
+
+/* centred against the item's whole text block (one or two lines), rather
+   than pinned near the top of the first line */
+.icon-list--large .icon-list__bullet {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.3em;
+  height: 1.3em;
+}
+
 /* PHASE 03's "WARM & TACTILE & CULTURAL" lead-in keywords */
 .accent-word {
   font-weight: 700;
