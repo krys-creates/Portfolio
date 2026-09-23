@@ -1963,10 +1963,13 @@
 /* expanded viewer: the site's lightbox look, plus prev/next arrows and a
    slide counter; wider/taller than the single-image lightbox because the
    wireframes carry small text */
+/* smaller than the single-image lightbox's own max-width, so there's
+   always enough gutter on both sides for the prev/next arrows sitting
+   just outside the panel, even at narrower desktop widths */
 .wf-modal .image-modal__panel,
 .wf-modal .image-modal__img {
-  max-width: min(94vw, 1500px);
-  max-height: 92vh;
+  max-width: min(82vw, 1300px);
+  max-height: 86vh;
 }
 
 .wf-modal__nav {
