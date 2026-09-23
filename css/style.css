@@ -986,3 +986,95 @@ html.is-loading {
     transition-duration: 0.01ms;
   }
 }
+
+/* ---------------------------------------------------------------------
+   12. MOBILE NOTICE ("adapted to laptop screens" popup)
+   Built and inserted by js/mobile-notice.js on phone-width screens only.
+   --------------------------------------------------------------------- */
+.mobile-notice {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-med) var(--ease-out), visibility var(--transition-med);
+}
+
+.mobile-notice.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-notice__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(23, 20, 18, 0.78);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.mobile-notice__panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 340px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  padding: 2rem 1.5rem 1.75rem;
+  text-align: center;
+  transform: translateY(10px) scale(0.98);
+  transition: transform var(--transition-med) var(--ease-out);
+}
+
+.mobile-notice.is-open .mobile-notice__panel {
+  transform: translateY(0) scale(1);
+}
+
+.mobile-notice__close {
+  position: absolute;
+  top: -0.85rem;
+  right: -0.85rem;
+  z-index: 1;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-white);
+  color: var(--color-dark);
+  border: 1px solid var(--color-border);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.mobile-notice__close:hover,
+.mobile-notice__close:focus-visible {
+  color: var(--color-orange);
+}
+
+.mobile-notice__heading {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 0.75rem;
+}
+
+.mobile-notice__body {
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-notice,
+  .mobile-notice__panel {
+    transition-duration: 0.01ms !important;
+  }
+}
