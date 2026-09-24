@@ -20,7 +20,8 @@
    13. Artsy Dublin components (box rows, icon lists, swatch trio)
    13b. MODU components (mascot hero, media rows, mode cards, stat cards)
    13c. Low-fi wireframe carousel (MODU)
-   13d. "Still coding" page (Surveillance Engine)
+   13d. "Still coding" page (Contact)
+   13e. Embedded live artwork (Surveillance Engine)
    14. Disclaimer line
    15. Responsive breakpoints
    16. Reduced motion
@@ -2069,8 +2070,60 @@
 }
 
 /* ---------------------------------------------------------------------
-   13d. "STILL CODING" PAGE (works/surveillance-engine.html) — a single
-        centred message for a project page that isn't built yet
+   13e. EMBEDDED LIVE ARTWORK (works/surveillance-engine.html) — the piece
+        itself, running inside the page in a bordered frame
+   --------------------------------------------------------------------- */
+.artwork-embed {
+  max-width: var(--project-content-width);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 5vw, 3.5rem) var(--container-pad) 0;
+}
+
+.artwork-embed__frame {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  min-height: 320px;
+  background: #000;
+  border: 1px solid var(--color-border);
+}
+
+.artwork-embed__frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.artwork-embed__note {
+  margin: 0.9rem 0 0;
+  font-size: 0.82rem;
+  color: var(--color-dark);
+}
+
+.artwork-embed__note a {
+  color: #6440BE;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.artwork-embed__note a:hover,
+.artwork-embed__note a:focus-visible {
+  color: #3F37C9;
+}
+
+/* variable / function names inside running text */
+.phase__desc code,
+.icon-list code {
+  padding: 0.05em 0.4em;
+  background: var(--color-border);
+  font-family: inherit;
+  font-size: 0.92em;
+}
+
+/* ---------------------------------------------------------------------
+   13d. "STILL CODING" PAGE (contact.html) — a single centred message for
+        a page that isn't built yet
    --------------------------------------------------------------------- */
 .coming-soon {
   max-width: var(--project-content-width);

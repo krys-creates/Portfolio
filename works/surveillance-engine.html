@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Surveillance Engine (2026) — K.M.</title>
-  <meta name="description" content="Surveillance Engine — an art project by K.M. This page is still being coded.">
+  <meta name="description" content="Surveillance Engine — an interactive artwork by K.M. inspired by Zuboff's surveillance capitalism: your webcam portrait assembles as you type personal data. Concept, tech implementation and how to use it.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Roboto+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../css/style.css?v=6">
-  <link rel="stylesheet" href="../css/project.css?v=121">
+  <link rel="stylesheet" href="../css/project.css?v=122">
 </head>
 <body class="page-surveillance-engine">
 <script src="../js/page-loader.js"></script>
@@ -83,21 +83,93 @@
 
   <main id="main-content">
 
-    <!-- ============ COMING SOON ============ -->
-    <section class="coming-soon">
-      <div class="coming-soon__stars" aria-hidden="true">
-        <svg class="coming-soon__star coming-soon__star--big" viewBox="0 0 200 200"><path fill="currentColor" d="M100,4 C100,100 100,100 196,100 C100,100 100,100 100,196 C100,100 100,100 4,100 C100,100 100,100 100,4 Z"/></svg>
-        <svg class="coming-soon__star coming-soon__star--small" viewBox="0 0 200 200"><path fill="currentColor" d="M100,4 C100,100 100,100 196,100 C100,100 100,100 100,196 C100,100 100,100 4,100 C100,100 100,100 100,4 Z"/></svg>
+    <!-- ============ TITLE ============ -->
+    <section class="project-hero">
+      <h1 class="project-hero__title"><span class="project-hero__slash">//</span> &lsquo;SURVEILLANCE ENGINE&rsquo; ART-PROJECT (2026)</h1>
+      <p class="project-hero__link">
+        live link &gt;&gt; <a href="https://krys-creates.github.io/int-art/" target="_blank" rel="noopener">krys-creates.github.io/int-art</a>
+      </p>
+    </section>
+
+    <!-- ============ META ============ -->
+    <section class="project-meta" aria-label="Project details">
+      <div class="project-meta__item">
+        <span class="project-meta__label"># keywords:</span>
+        <p class="project-meta__value">interactive art, creative coding, ASCII portrait, webcam, data exposure, generative sound</p>
       </div>
 
-      <p class="coming-soon__label"><span class="project-hero__slash">//</span> &lsquo;surveillance engine&rsquo; art-project, 2026</p>
+      <div class="project-meta__item project-meta__item--right">
+        <span class="project-meta__label"># tools:</span>
+        <p class="project-meta__value">p5.js, p5.sound, JavaScript, HTML/CSS, GitHub </p>
+      </div>
+    </section>
 
-      <h1 class="coming-soon__title"><span class="coming-soon__oops">oops,</span> Krys is still coding this page<span class="typewriter-cursor" aria-hidden="true"></span></h1>
+    <!-- ============ PROJECT BRIEF ============ -->
+    <section class="project-quote">
+      <div class="project-quote__bar">
+        <span>/ Surveillance Engine is...</span>
+        <span class="project-quote__sparkles" aria-hidden="true">
+          <span class="heading-sparkle"><svg><use href="#icon-sparkle"></use></svg></span>
+          <span class="heading-sparkle"><svg><use href="#icon-sparkle"></use></svg></span>
+          <span class="heading-sparkle"><svg><use href="#icon-sparkle"></use></svg></span>
+        </span>
+      </div>
+      <div class="project-quote__body">
+        <p class="project-quote__text project-quote__text--plain">an interactive artwork inspired by Shoshana Zuboff&rsquo;s &lsquo;surveillance capitalism&rsquo; (more about below). As you type personal information (age, email, location&hellip;), your digital portrait, drawn live from your webcam, gradually assembles out of the very words you typed.</p>
+      </div>
+    </section>
 
-      <a class="coming-soon__back" href="../index.html#works">
-        <span class="coming-soon__back-arrow" aria-hidden="true">&lt;</span>
-        <span>back to works</span>
-      </a>
+    <!-- ============ LIVE ARTWORK ============ -->
+    <section class="artwork-embed" aria-label="Surveillance Engine, live artwork">
+      <div class="artwork-embed__frame">
+        <iframe src="https://krys-creates.github.io/int-art/" title="Surveillance Engine, live interactive artwork" allow="camera; autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p class="artwork-embed__note"><span class="project-hero__slash">//</span> live artwork, best on a laptop with a webcam. It will ask for camera access. Keep sound on. <a href="https://krys-creates.github.io/int-art/" target="_blank" rel="noopener">open in a new tab here &gt;</a></p>
+    </section>
+
+    <!-- ============ SENSE / TECH / USE ============ -->
+    <section class="project-phases" aria-label="About the artwork">
+      <div class="phase">
+        <h2 class="phase__label">&lt; HOW TO <br>USE IT &gt;</h2>
+        <div>
+          <p class="phase__desc"><strong>1/</strong> <strong>type personal details</strong>: age, location, email, last purchase&hellip; (made-up ones work too)</p>
+          <p class="phase__desc"><strong>2/</strong> <strong>hover over your portrait</strong> to see which data category built each part</p>
+          <p class="phase__desc"><strong>3/</strong> <strong>keep typing</strong> until you reach the critical exposure threshold</p>
+          <p class="phase__desc"><strong>4/</strong> optional: change how the portrait looks with the <strong>render style</strong> sliders</p>
+        </div>
+      </div>
+
+      <div class="phase">
+        <h2 class="phase__label">&lt; THE SENSE <br>OF THE WORK &gt;</h2>
+        <div>
+          <p class="phase__desc"><strong>i/</strong> <span class="phase__subhead">real vs synthetic</span></p>
+          <p class="phase__desc">The piece stages the tension between your private, physical self and the surveilled, datafied version of it that lives in digital systems: your real keystrokes and information against the data points, categories and profiles that surveillance capitalism turns them into.</p>
+
+          <p class="phase__desc phase__desc--spaced"><strong>ii/</strong> <span class="phase__subhead">conceptual design choices</span></p>
+          <ul class="icon-list">
+            <li><span class="heading-sparkle icon-list__bullet" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span><strong>Empty canvas:</strong> nothing shows until you type, so disclosure decides visibility.</li>
+            <li><span class="heading-sparkle icon-list__bullet" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span><strong>Typed text as portrait:</strong> your characters become the ASCII symbols that form your face.</li>
+            <li><span class="heading-sparkle icon-list__bullet" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span><strong>Exposure categories:</strong> identity, location, financial, behavioural and biometric data mirror how data brokers segment people. Hover to see which one built each part of your face.</li>
+            <li><span class="heading-sparkle icon-list__bullet" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span><strong>Escalating warnings:</strong> from &ldquo;[!] DATA COLLECTION IN PROGRESS&rdquo; to &ldquo;[!!!] CRITICAL EXPOSURE THRESHOLD&rdquo;, so self-disclosure feels done to you, not by you.</li>
+            <li><span class="heading-sparkle icon-list__bullet" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span><strong>Sound and light:</strong> noise grows as you type and every keypress flashes, making each character a transmission.</li>
+            <li><span class="heading-sparkle icon-list__bullet" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span><strong>Retro terminal look:</strong> CRT scanlines, phosphor glow and Matrix green nod to early computing and hacker culture.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <h2 class="phase__label">&lt; TECH <br>IMPLEMENTATION &gt;</h2>
+        <div>
+          <p class="phase__desc">I built it in p5.js and plain JavaScript, with everything calculated live:</p>
+          <ul class="icon-list">
+            <li><span class="heading-sparkle icon-list__bullet" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span><strong>Keyboard:</strong> typing raises a density value (0 to 1 over 150 characters) that sets how much of the webcam image shows. It also weaves your text into the portrait, flashes the screen, fills five exposure bars, triggers warnings and scales the noise.</li>
+            <li><span class="heading-sparkle icon-list__bullet" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span><strong>Mouse:</strong> hovering a tagged grid cell lights it in its category colour and shows a tooltip.</li>
+            <li><span class="heading-sparkle icon-list__bullet" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span><strong>Webcam:</strong> live video is sampled 60 times a second. Each pixel&rsquo;s brightness, weighted towards green and stretched for contrast, picks an ASCII character: dense for dark areas, sparse for bright. Nothing is pre-rendered.</li>
+            <li><span class="heading-sparkle icon-list__bullet" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span><strong>Sound:</strong> smoothed noise whose volume follows your typing. Audio starts on your first click, as browsers require.</li>
+            <li><span class="heading-sparkle icon-list__bullet" aria-hidden="true"><svg><use href="#icon-sparkle"></use></svg></span><strong>Glow:</strong> every character is drawn twice for the phosphor bloom, with a scanline sweep and a fading keystroke flash.</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
   </main>
