@@ -538,7 +538,7 @@ button:focus-visible {
 .works {
   max-width: var(--container-width);
   margin: 0 auto;
-  padding: 0 var(--container-pad) var(--section-gap);
+  padding: 0 var(--container-pad); /* the footer's top margin supplies the space below */
 }
 
 .works__grid {
@@ -554,6 +554,85 @@ button:focus-visible {
 
 .works__grid .project {
   margin-bottom: 0;
+}
+
+.works__grid:last-child {
+  margin-bottom: 0;
+}
+
+/* "more coming soon": frameless stylised text with a few twinkling stars */
+.works__soon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.works__soon__box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 75%;
+  margin: 0 auto;
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.works__soon__text {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15em;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 2.6vw, 2.4rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-dark);
+}
+
+.works__soon__line--accent {
+  color: var(--color-orange);
+}
+
+.works__soon__cursor {
+  margin-left: 0.1em;
+  color: var(--color-orange);
+  animation: soon-blink 1.1s steps(1) infinite;
+}
+
+.works__soon__star {
+  position: absolute;
+  display: block;
+  color: var(--color-text);
+  animation: soon-twinkle 3.2s ease-in-out infinite;
+}
+
+.works__soon__star svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* stars sit just outside the text block (em units follow the text size) */
+.works__soon__star--1 { top: -0.85em; left: -0.55em; width: 0.8em; height: 0.8em; }
+.works__soon__star--2 { top: -0.6em; right: -0.5em; width: 0.45em; height: 0.45em; animation-delay: -1.1s; }
+.works__soon__star--3 { bottom: -0.75em; left: 6%; width: 0.4em; height: 0.4em; animation-delay: -2.1s; }
+.works__soon__star--4 { bottom: -1.1em; right: -0.1em; width: 0.9em; height: 0.9em; animation-delay: -0.6s; }
+
+@keyframes soon-blink {
+  50% { opacity: 0; }
+}
+
+@keyframes soon-twinkle {
+  0%, 100% { opacity: 0.35; transform: scale(0.85) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.1) rotate(20deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .works__soon__cursor,
+  .works__soon__star { animation: none; }
 }
 
 .project__link {

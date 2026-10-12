@@ -1499,6 +1499,12 @@
   height: 1.3em;
 }
 
+/* normal-size bullets, centred against the item's whole text block */
+.icon-list--centered .icon-list__bullet {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 /* PHASE 03's "WARM & TACTILE & CULTURAL" lead-in keywords */
 .accent-word {
   font-weight: 700;
@@ -2085,6 +2091,11 @@
   min-height: 320px;
   background: #000;
   border: 1px solid var(--color-border);
+}
+
+.artwork-embed__frame--chart {
+  aspect-ratio: 10 / 8.2;
+  background: #0f1423;
 }
 
 .artwork-embed__frame iframe {
