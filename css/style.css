@@ -677,25 +677,22 @@ button:focus-visible {
 }
 
 .project__media {
-  /* an explicit block: this is a <span>, and as an inline box it is the
-     containing block for the keyword tag, which Safari sizes far too narrow */
+  /* an explicit block (this is a <span>; as an inline box it is the containing
+     block for the keyword tag, which Safari sizes far too narrow).
+     The preview images have always shown at their own natural proportions, so
+     the aspect-ratio crops below are deliberately switched off: they never
+     applied while this was an inline box, and enabling them would crop images */
   display: block;
   position: relative;
   overflow: hidden;
   background: var(--color-border);
-  aspect-ratio: 16 / 10;
+  aspect-ratio: auto;
 }
 
-.project__media--square {
-  aspect-ratio: 1 / 1;
-}
-
-.project__media--tall {
-  aspect-ratio: 8 / 9;
-}
-
+.project__media--square,
+.project__media--tall,
 .project__media--wide {
-  aspect-ratio: 16 / 9.3;
+  aspect-ratio: auto;
 }
 
 .project__media img {
