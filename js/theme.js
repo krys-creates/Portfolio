@@ -1,20 +1,14 @@
 /**
  * theme.js
- * Night-mode toggle. The saved/system theme is applied before first paint by a
+ * Night-mode toggle. The saved theme (light unless the visitor chose night mode) is applied before first paint by a
  * tiny inline script in each page's <head> (so there is no light flash); this
- * file wires up the header switch, remembers the choice, and keeps tabs and the
- * OS setting in sync.
+ * file wires up the header switch, remembers the choice, and keeps open tabs in sync.
  */
 (function () {
   'use strict';
 
   var KEY = 'theme';
   var root = document.documentElement;
-  var media = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
-
-  function stored() {
-    try { return localStorage.getItem(KEY); } catch (e) { return null; }
-  }
 
   function save(theme) {
     try { localStorage.setItem(KEY, theme); } catch (e) { /* private mode: still works for this visit */ }
@@ -58,15 +52,6 @@
     save(next);
     apply(next, true);
   });
-
-  // follow the OS setting until the visitor makes their own choice
-  if (media) {
-    var onSystem = function (e) {
-      if (!stored()) apply(e.matches ? 'dark' : 'light', true);
-    };
-    if (media.addEventListener) media.addEventListener('change', onSystem);
-    else if (media.addListener) media.addListener(onSystem);
-  }
 
   // another tab changed the theme
   window.addEventListener('storage', function (e) {
