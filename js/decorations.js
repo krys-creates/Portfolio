@@ -22,21 +22,49 @@
   // or how the footer's height changes across breakpoints/content.
   // Runs unconditionally (even for prefers-reduced-motion), since it's
   // layout, not animation.
+  //
+  // The squares are placed in % of this layer's height, so the height has to
+  // match the *final* page height. Measuring it once is not enough: lazy-loaded
+  // images, web fonts and the loading screen all change the page height after
+  // the first measurement, and a stale (too short) value crowds every square
+  // into the top part of the page. So it is re-measured whenever anything that
+  // can change the layout happens.
+  var wrapper = document.getElementById('decorations');
+  var footer = document.querySelector('.site-footer');
+  var constrainQueued = false;
+
   function constrainToFooter() {
-    var wrapper = document.getElementById('decorations');
-    var footer = document.querySelector('.site-footer');
+    constrainQueued = false;
     if (!wrapper || !footer) return;
-    wrapper.style.height = footer.offsetTop + 'px';
+    var top = Math.round(footer.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop || 0));
+    if (top > 0) wrapper.style.height = top + 'px';
   }
 
-  constrainToFooter();
-  window.addEventListener('load', constrainToFooter);
+  function queueConstrain() {
+    if (constrainQueued) return;
+    constrainQueued = true;
+    requestAnimationFrame(constrainToFooter);
+  }
 
-  var resizeTimer;
-  window.addEventListener('resize', function () {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(constrainToFooter, 150);
-  });
+  if (wrapper && footer) {
+    constrainToFooter();
+    window.addEventListener('load', queueConstrain);
+    window.addEventListener('resize', queueConstrain);
+    window.addEventListener('pageshow', queueConstrain);      // back/forward cache restores
+    window.addEventListener('pageloader:done', queueConstrain);
+    document.addEventListener('DOMContentLoaded', queueConstrain);
+    // lazy images finishing (load events don't bubble, so listen in the capture phase)
+    document.addEventListener('load', queueConstrain, true);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(queueConstrain);
+
+    // any later change in content height (the footer moves with it)
+    if (window.ResizeObserver) {
+      var ro = new ResizeObserver(queueConstrain);
+      var main = document.getElementById('main-content');
+      if (main) ro.observe(main);
+      ro.observe(footer);
+    }
+  }
 
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
