@@ -669,6 +669,12 @@ button:focus-visible {
   width: 78%;
 }
 
+/* Gapminder's landscape preview, slightly larger than the standard 75% */
+.project--larger .project__frame,
+.project--larger .project__caption {
+  width: 88%;
+}
+
 .project__link:hover .project__frame,
 .project__link:focus-visible .project__frame,
 .project__link.is-active .project__frame {
