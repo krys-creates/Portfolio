@@ -29,6 +29,17 @@
   --color-border: rgba(23, 20, 18, 0.1);
   --color-white: #FFFFFF;
 
+  /* Theme-aware tokens (overridden for night mode below) */
+  --color-on-accent: #FFFFFF;            /* text on the red accent; stays white in both themes */
+  --color-header-bg: rgba(248, 246, 240, 0.92);
+  --color-link: #6440BE;
+  --color-link-hover: #3F37C9;
+  --color-border-strong: rgba(23, 20, 18, 0.22);
+  --color-stripe: rgba(23, 20, 18, 0.045);
+  --color-surface-soft: #FBF9F6;
+  --color-placeholder: #E7E3DC;
+  --color-tool-border: #a8a199;
+
   /* Typography */
   --font-mono: 'JetBrains Mono', 'Courier New', Courier, monospace;
   --font-script: 'Caveat', cursive;
@@ -47,6 +58,31 @@
 
   /* Header */
   --header-height: 76px;
+}
+
+/* Night mode: same warm palette, inverted. --color-white is the "surface"
+   colour (cards, pop-ups) and --color-dark the "ink" colour, so components that
+   pair them (dark button + white text) simply swap and stay legible. */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: #14110F;
+  --color-text: #F0ECE4;
+  --color-text-muted: #A8A196;
+  --color-dark: #DAD4C9;
+  --color-white: #1E1A17;
+  --color-border: rgba(240, 236, 228, 0.14);
+  --color-orange-text: #FF8A8A;
+  --color-orange-pale: rgba(239, 68, 68, 0.3);
+  --color-orange-decoration: #6E2C2C;
+
+  --color-header-bg: rgba(20, 17, 15, 0.88);
+  --color-link: #B9A2FF;
+  --color-link-hover: #D8CBFF;
+  --color-border-strong: rgba(240, 236, 228, 0.28);
+  --color-stripe: rgba(240, 236, 228, 0.05);
+  --color-surface-soft: #1A1613;
+  --color-placeholder: #2A2521;
+  --color-tool-border: #6B655C;
 }
 
 /* ---------------------------------------------------------------------
@@ -188,7 +224,7 @@ button:focus-visible {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(248, 246, 240, 0.92);
+  background: var(--color-header-bg);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--color-border);
@@ -235,13 +271,105 @@ button:focus-visible {
 .nav-link:hover,
 .nav-link:focus-visible {
   background: var(--color-orange);
-  color: var(--color-white);
+  color: var(--color-on-accent);
 }
 
 .nav-link--active .nav-link__slash,
 .nav-link:hover .nav-link__slash,
 .nav-link:focus-visible .nav-link__slash {
-  color: var(--color-white);
+  color: var(--color-on-accent);
+}
+
+.site-header__end {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.9rem, 2vw, 1.5rem);
+}
+
+/* night-mode switch: a squared track (like the site's squares) with a red
+   sparkle that slides across and turns as the theme changes */
+.theme-toggle {
+  position: relative;
+  flex: none;
+  width: 54px;
+  height: 28px;
+  padding: 0;
+  border: 1.5px solid var(--color-text);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: border-color var(--transition-fast) var(--ease-soft),
+              background-color var(--transition-fast) var(--ease-soft),
+              transform var(--transition-fast) var(--ease-soft);
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-orange);
+  background: var(--color-orange-pale);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 3px;
+}
+
+.theme-toggle:active {
+  transform: scale(0.96);
+}
+
+.theme-toggle__icon {
+  position: absolute;
+  top: 50%;
+  width: 13px;
+  height: 13px;
+  margin-top: -6.5px;
+  transition: opacity 0.3s var(--ease-soft);
+}
+
+.theme-toggle__icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.theme-toggle__icon--moon { right: 7px; opacity: 1; }
+.theme-toggle__icon--sun  { left: 7px;  opacity: 0; }
+
+.theme-toggle__knob {
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  color: var(--color-orange);
+  transition: transform 0.5s var(--ease-out);
+}
+
+.theme-toggle__knob svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+html[data-theme="dark"] .theme-toggle__knob {
+  transform: translateX(26px) rotate(180deg);
+}
+
+html[data-theme="dark"] .theme-toggle__icon--moon { opacity: 0; }
+html[data-theme="dark"] .theme-toggle__icon--sun  { opacity: 1; }
+
+/* short colour cross-fade, applied by theme.js only while switching */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: background-color 0.4s var(--ease-soft),
+              color 0.4s var(--ease-soft),
+              border-color 0.4s var(--ease-soft),
+              fill 0.4s var(--ease-soft),
+              stroke 0.4s var(--ease-soft) !important;
 }
 
 .logo img {
@@ -1171,4 +1299,22 @@ html.is-loading {
   .mobile-notice__panel {
     transition-duration: 0.01ms !important;
   }
+}
+
+
+/* ---------------------------------------------------------------------
+   13. NIGHT-MODE ARTWORK TWEAKS
+   Images drawn dark-on-transparent would vanish on the dark page.
+   --------------------------------------------------------------------- */
+html[data-theme="dark"] .logo img {
+  filter: invert(1) hue-rotate(180deg);   /* black dots turn light, the red stays red */
+}
+
+html[data-theme="dark"] .hero__heading-globe img {
+  opacity: 0.55;
+}
+
+html[data-theme="dark"] img[src$="git 2.png"],
+html[data-theme="dark"] img[src$="codex.png"] {
+  filter: invert(1);
 }

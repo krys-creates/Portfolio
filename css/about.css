@@ -222,11 +222,11 @@
 .tool-group--twine     { grid-column: 2; grid-row: 2; justify-self: start; }
 
 .tool-group__box {
-  border: 1px solid #a8a199;
+  border: 1px solid var(--color-tool-border);
   padding: 1.25rem;
   display: inline-flex;
   gap: 1.25rem;
-  background: #FBF9F6;
+  background: var(--color-surface-soft);
 }
 
 .tool-group__box--row {

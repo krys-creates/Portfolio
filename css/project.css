@@ -64,14 +64,14 @@
 }
 
 .project-hero__link a {
-  color: #6440BE;
+  color: var(--color-link);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
 .project-hero__link a:hover,
 .project-hero__link a:focus-visible {
-  color: #3F37C9;
+  color: var(--color-link-hover);
 }
 
 /* no live build to link to yet — styled to read as clearly inactive
@@ -129,14 +129,14 @@
 }
 
 .project-meta__value a {
-  color: #6440BE;
+  color: var(--color-link);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
 .project-meta__value a:hover,
 .project-meta__value a:focus-visible {
-  color: #3F37C9;
+  color: var(--color-link-hover);
 }
 
 /* ---------------------------------------------------------------------
@@ -192,14 +192,14 @@
 }
 
 .project-quote__text a {
-  color: #6440BE;
+  color: var(--color-link);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
 .project-quote__text a:hover,
 .project-quote__text a:focus-visible {
-  color: #3F37C9;
+  color: var(--color-link-hover);
 }
 
 /* factual project briefs (not a quotation) read better upright than
@@ -321,14 +321,14 @@
 }
 
 .phase + .phase {
-  border-top: 1px solid rgba(23, 20, 18, 0.22);
+  border-top: 1px solid var(--color-border-strong);
 }
 
 /* for a .phase that's the first (and only) one in its own
    .project-phases section — .phase + .phase can't reach it, but it still
    needs the same separator line above it as every other phase gets */
 .phase--separated {
-  border-top: 1px solid rgba(23, 20, 18, 0.22);
+  border-top: 1px solid var(--color-border-strong);
 }
 
 /* the Trinity page's "PHASE 03: DESIGNING" heading leads straight into its
@@ -397,7 +397,7 @@
   font-style: italic;
   font-weight: 700;
   font-size: 0.75rem;
-  color: var(--color-white);
+  color: var(--color-on-accent);
 }
 
 .phase__result-box {
@@ -441,8 +441,8 @@
     45deg,
     transparent,
     transparent 10px,
-    rgba(23, 20, 18, 0.045) 10px,
-    rgba(23, 20, 18, 0.045) 20px
+    var(--color-stripe) 10px,
+    var(--color-stripe) 20px
   );
 }
 
@@ -573,7 +573,7 @@
    for this treatment */
 .page-artsy-dublin .project-figure__media img {
   object-fit: cover;
-  border: 1px solid rgba(23, 20, 18, 0.22);
+  border: 1px solid var(--color-border-strong);
 }
 
 .project-figure__zoom:hover img,
@@ -913,7 +913,7 @@
   /* height tracks width exactly at any screen size, rather than
      approximating it with vw */
   aspect-ratio: 3 / 2;
-  background: #E7E3DC;
+  background: var(--color-placeholder);
   border: 1px solid var(--color-border);
   padding: clamp(0.5rem, 1.5vw, 0.85rem);
 }
@@ -1010,7 +1010,7 @@
 .brand-showcase__swatch span {
   font-size: 0.58rem;
   font-weight: 400;
-  color: var(--color-white);
+  color: var(--color-on-accent);
 }
 
 .brand-showcase__palette-note {
@@ -1243,7 +1243,7 @@
 /* the base .brand-showcase__swatch label is white text, for the dark
    swatches — the pale ones (white / parchment) need a dark label instead */
 .brand-showcase__swatch-label--dark {
-  color: var(--color-text) !important;
+  color: #171412 !important; /* fixed: it sits on a pale swatch in both themes */
 }
 
 .brand-showcase__font-sample {
@@ -1426,7 +1426,7 @@
 .timeline__box {
   flex: 1 1 220px;
   border: 1px solid var(--color-border);
-  background: #FBF9F6;
+  background: var(--color-surface-soft);
   padding: 1rem 1.25rem;
   font-size: 0.85rem;
   line-height: 1.75;
@@ -1716,7 +1716,7 @@
 
 .mode-card {
   border: 1px solid var(--color-border);
-  background: #FBF9F6;
+  background: var(--color-surface-soft);
   padding: 1.25rem 0.85rem 1.15rem;
   text-align: center;
   min-width: 0;
@@ -1762,7 +1762,7 @@
 
 .stat-card {
   border: 1px solid var(--color-border);
-  background: #FBF9F6;
+  background: var(--color-surface-soft);
   padding: 1.1rem 1.2rem 1.25rem;
   min-width: 0;
 }
@@ -1991,7 +1991,7 @@
   padding: 0;
   border: none;
   background: none;
-  color: var(--color-white);
+  color: var(--color-on-accent);
   cursor: pointer;
   transition: color 0.2s ease;
 }
@@ -2042,7 +2042,7 @@
     width: 30px;
     height: 48px;
     background: rgba(68, 64, 60, 0.6);
-    color: var(--color-white);
+    color: var(--color-on-accent);
   }
 
   .wf-carousel__arrow--prev {
@@ -2113,14 +2113,14 @@
 }
 
 .artwork-embed__note a {
-  color: #6440BE;
+  color: var(--color-link);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
 .artwork-embed__note a:hover,
 .artwork-embed__note a:focus-visible {
-  color: #3F37C9;
+  color: var(--color-link-hover);
 }
 
 /* variable / function names inside running text */
@@ -2136,6 +2136,35 @@
    13d. "STILL CODING" PAGE (contact.html) — a single centred message for
         a page that isn't built yet
    --------------------------------------------------------------------- */
+/* sticky footer: the page is at least one viewport tall and <main> absorbs the
+   spare height, so the footer sits at the bottom of short pages and just
+   follows the content on tall ones. 100vh is the fallback for browsers
+   without dynamic viewport units (dvh keeps it right under mobile toolbars) */
+body.page-contact {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+body.page-contact > main {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+body.page-contact > main > .coming-soon {
+  width: 100%;
+  min-height: 0;
+}
+
+body.page-contact > .site-footer {
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .coming-soon {
   max-width: var(--project-content-width);
   min-height: 62vh;
