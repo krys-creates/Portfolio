@@ -677,6 +677,9 @@ button:focus-visible {
 }
 
 .project__media {
+  /* an explicit block: this is a <span>, and as an inline box it is the
+     containing block for the keyword tag, which Safari sizes far too narrow */
+  display: block;
   position: relative;
   overflow: hidden;
   background: var(--color-border);
