@@ -59,6 +59,10 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  /* horizontal clipping lives on <html> (it propagates to the viewport), not on
+     <body>: an overflow value on <body> makes Safari treat it as the scroll
+     container and the sticky header stops sticking */
+  overflow-x: hidden;
 }
 
 html, body {
@@ -67,7 +71,6 @@ html, body {
 
 body {
   position: relative;
-  overflow-x: hidden;
   margin: 0;
   background: var(--color-bg);
   color: var(--color-text);
@@ -181,6 +184,7 @@ button:focus-visible {
    5. HEADER & NAVIGATION
    --------------------------------------------------------------------- */
 .site-header {
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -704,6 +708,9 @@ button:focus-visible {
   top: 14px;
   left: 14px;
   z-index: 3;
+  /* explicit max-content width: Safari otherwise sizes this absolutely-positioned
+     box far too narrow, so the text wraps one word per line while it reveals */
+  width: max-content;
   max-width: calc(100% - 28px);
   background: var(--color-white);
   color: var(--color-orange);
@@ -711,13 +718,15 @@ button:focus-visible {
   line-height: 1.5;
   letter-spacing: 0.01em;
   padding: 0.5em 0.7em;
+  -webkit-clip-path: inset(0 100% 0 0);
   clip-path: inset(0 100% 0 0);
-  transition: clip-path 0.5s var(--ease-out);
+  transition: clip-path 0.5s var(--ease-out), -webkit-clip-path 0.5s var(--ease-out);
 }
 
 .project__link:hover .project__tag,
 .project__link:focus-visible .project__tag,
 .project__link.is-active .project__tag {
+  -webkit-clip-path: inset(0 0 0 0);
   clip-path: inset(0 0 0 0);
   transition-delay: 0.05s;
 }
