@@ -2140,26 +2140,30 @@
    spare height, so the footer sits at the bottom of short pages and just
    follows the content on tall ones. 100vh is the fallback for browsers
    without dynamic viewport units (dvh keeps it right under mobile toolbars) */
-body.page-contact {
+body.page-contact,
+body.page-photography {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   min-height: 100dvh;
 }
 
-body.page-contact > main {
+body.page-contact > main,
+body.page-photography > main {
   flex: 1 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-body.page-contact > main > .coming-soon {
+body.page-contact > main > .coming-soon,
+body.page-photography > main > .coming-soon {
   width: 100%;
   min-height: 0;
 }
 
-body.page-contact > .site-footer {
+body.page-contact > .site-footer,
+body.page-photography > .site-footer {
   flex-shrink: 0;
   width: 100%;
   box-sizing: border-box;
