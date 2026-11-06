@@ -544,6 +544,18 @@
   aspect-ratio: 16 / 10;
 }
 
+/* hairline frame for a screenshot whose own edge is light and has no outline
+   baked in (the other Trinity screenshots carry a thin grey stroke in the
+   image itself); drawn over the image so it hugs the rounded edge */
+.project-figure__media--framed::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(142, 154, 166, 0.7);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
 .project-figure__zoom {
   display: block;
   width: 100%;
@@ -643,6 +655,21 @@
 .postcard-back-wrap__link {
   margin: 0 0 0 clamp(1.5rem, 4vw, 2.5rem);
   text-align: left;
+}
+
+/* Trinity: the lone building-subpage screenshot is exactly one column wide,
+   the same size as each image in the two-up rows above it */
+.postcard-back-wrap--left .project-figure {
+  flex: 0 0 calc(50% - 0.625rem);
+  width: calc(50% - 0.625rem);
+  max-width: none;
+}
+
+@media (max-width: 768px) {
+  .postcard-back-wrap--left .project-figure {
+    flex-basis: 100%;
+    width: 100%;
+  }
 }
 
 .postcard-back-wrap .project-figure {
@@ -2096,6 +2123,14 @@
 .artwork-embed__frame--chart {
   aspect-ratio: 10 / 8.2;
   background: #0f1423;
+  /* the translucent border used to sit over the dark background and read as a
+     thick black line; keep the dark fill inside the border only */
+  background-clip: padding-box;
+  border-color: rgba(23, 20, 18, 0.1);
+}
+
+html[data-theme="dark"] .artwork-embed__frame--chart {
+  border-color: rgba(240, 236, 228, 0.14);
 }
 
 .artwork-embed__frame iframe {
