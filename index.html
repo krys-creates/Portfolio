@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Roboto+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css?v=17">
+  <link rel="stylesheet" href="css/style.css?v=20">
 </head>
 <body>
 <script src="js/page-loader.js"></script>
@@ -259,14 +259,20 @@
         <p class="project__caption" id="p4-caption">// Trinity campus buildings search engine, 2026</p>
       </article>
 
-      <!-- Two-column row -->
-      <div class="works__grid">
+      <!-- ============ SIDE PROJECTS (three per row) ============ -->
+      <h2 class="works__side-heading" id="side-projects-title">
+        <span class="works__side-heading__hash">#</span>
+        <span>SIDE PROJECTS</span>
+        <span class="works__side-heading__line" aria-hidden="true"></span>
+      </h2>
+
+      <div class="works__grid works__grid--three" role="group" aria-labelledby="side-projects-title">
         <article class="project">
           <a class="project__link" href="works/blizzard-countdown.html" aria-describedby="p5-caption">
             <span class="project__frame">
               <span class="project__corner project__corner--tl" aria-hidden="true"></span>
               <span class="project__corner project__corner--br" aria-hidden="true"></span>
-              <span class="project__media project__media--tall">
+              <span class="project__media">
                 <span class="project__tag" aria-hidden="true">interaction design, digital narration, JavaScript</span>
                 <img src="assets/images/blizzard.cd.jpg" alt="Blizzard Countdown interactive digital story interface" loading="lazy">
               </span>
@@ -276,11 +282,25 @@
         </article>
 
         <article class="project">
+          <a class="project__link" href="works/winrar-rebrand.html" aria-describedby="p7-caption">
+            <span class="project__frame">
+              <span class="project__corner project__corner--tl" aria-hidden="true"></span>
+              <span class="project__corner project__corner--br" aria-hidden="true"></span>
+              <span class="project__media">
+                <span class="project__tag" aria-hidden="true">graphic design &amp; design research</span>
+                <img src="assets/images/side1.png" alt="WinRAR brand identity re-brand, social post mockup" loading="lazy">
+              </span>
+            </span>
+          </a>
+          <p class="project__caption" id="p7-caption">// WinRAR brand identity re-brand, 2025</p>
+        </article>
+
+        <article class="project">
           <a class="project__link" href="works/surveillance-engine.html" aria-describedby="p6-caption">
             <span class="project__frame">
               <span class="project__corner project__corner--tl" aria-hidden="true"></span>
               <span class="project__corner project__corner--br" aria-hidden="true"></span>
-              <span class="project__media project__media--tall">
+              <span class="project__media">
                 <span class="project__tag" aria-hidden="true">interaction design, p5js, interactive graphics, JS, creative coding</span>
                 <img src="assets/images/surveillance.jpg" alt="'Surveillance engine' generative art project terminal interface" loading="lazy">
               </span>
@@ -288,33 +308,15 @@
           </a>
           <p class="project__caption" id="p6-caption">// &lsquo;surveillance engine&rsquo; art-project, 2026</p>
         </article>
-      </div>
 
-      <!-- Full-width -->
-      <article class="project project--feature">
-        <a class="project__link" href="works/winrar-rebrand.html" aria-describedby="p7-caption">
-          <span class="project__frame">
-            <span class="project__corner project__corner--tl" aria-hidden="true"></span>
-            <span class="project__corner project__corner--br" aria-hidden="true"></span>
-            <span class="project__media project__media--wide">
-              <span class="project__tag" aria-hidden="true">graphic design &amp; design research</span>
-              <img src="assets/images/winrar.jpg" alt="WinRAR brand identity re-brand social post mockup" loading="lazy">
-            </span>
-          </span>
-        </a>
-        <p class="project__caption" id="p7-caption">// WinRAR brand identity re-brand, 2025</p>
-      </article>
-
-      <!-- Last card: same two-column grid, so it matches the card above it (left column) -->
-      <div class="works__grid">
-        <article class="project project--larger">
+        <article class="project">
           <a class="project__link" href="works/data-viz-gapminder.html" aria-describedby="p8-caption">
             <span class="project__frame">
               <span class="project__corner project__corner--tl" aria-hidden="true"></span>
               <span class="project__corner project__corner--br" aria-hidden="true"></span>
-              <span class="project__media project__media--tall">
+              <span class="project__media">
                 <span class="project__tag" aria-hidden="true">interactive design, accessibility, data visualisation, p5.js</span>
-                <img src="assets/images/gap.png" alt="Gapminder 2018 interactive bubble chart of income and life expectancy by country" loading="lazy">
+                <img src="assets/images/side2.png" alt="Gapminder data visualisation, two views of the 2018 bubble chart" loading="lazy">
               </span>
             </span>
           </a>

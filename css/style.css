@@ -688,6 +688,74 @@ html.theme-transition *::after {
   margin-bottom: 0;
 }
 
+/* "side projects": a centred label, then a three-up row (two-up on tablets,
+   single column on phones, via the breakpoints below) */
+.works__side-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0 clamp(2rem, 4vw, 3rem);
+  padding-top: clamp(1rem, 3vw, 2rem);
+  font-family: var(--font-mono);
+  font-size: clamp(0.95rem, 0.4vw + 0.85rem, 1.05rem);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--color-text);
+}
+
+.works__side-heading__hash {
+  color: var(--color-orange);
+}
+
+.works__side-heading__line {
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.works__grid--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.works__grid--three .project__frame,
+.works__grid--three .project__caption {
+  width: 90%;
+}
+
+/* "more coming soon" sits in the last row's right-hand column */
+.works__grid--three .works__soon {
+  grid-column: 3;
+  align-self: end;
+}
+
+.works__grid--three .works__soon__box {
+  width: 100%;
+  padding: 3rem 0 0.5rem;
+}
+
+.works__grid--three .works__soon__text {
+  font-size: clamp(1.15rem, 1.9vw, 1.9rem);
+  white-space: nowrap;
+}
+
+@media (max-width: 960px) {
+  .works__grid--three {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .works__grid--three .works__soon {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .works__grid--three .works__soon {
+    grid-column: 1;
+  }
+}
+
 .works__grid:last-child {
   margin-bottom: 0;
 }
