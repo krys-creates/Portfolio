@@ -1942,9 +1942,12 @@
 /* solid triangle arrows in the site's dark, sitting just outside the frame
    at mid-height; the previous arrow only appears once there's a slide to go
    back to, the next one disappears on the last slide */
+/* top is a fixed fraction of the carousel's width (the middle of a typical
+   frame) rather than 50% of the frame, so the arrows stay put while the frame
+   changes height from one slide to the next */
 .wf-carousel__arrow {
   position: absolute;
-  top: 50%;
+  top: calc(100cqw / 3.2);
   transform: translateY(-50%);
   display: flex;
   align-items: center;
@@ -2036,8 +2039,11 @@
   max-height: 86vh;
 }
 
+/* the arrows are pinned to the left and right edges of the screen (not to the
+   image), so they stay put as the enlarged image changes size between slides */
 .wf-modal__nav {
-  position: absolute;
+  position: fixed;
+  z-index: 2;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -2054,11 +2060,11 @@
 }
 
 .wf-modal__nav--prev {
-  left: -58px;
+  left: clamp(8px, 2.2vw, 40px);
 }
 
 .wf-modal__nav--next {
-  right: -58px;
+  right: clamp(8px, 2.2vw, 40px);
 }
 
 .wf-modal__nav svg {
