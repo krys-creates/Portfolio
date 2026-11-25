@@ -962,6 +962,31 @@
   color: var(--color-text-muted);
 }
 
+.booklet-caption a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.booklet-caption a:hover,
+.booklet-caption a:focus-visible {
+  color: var(--color-link-hover);
+}
+
+/* the MODU slide deck: full content width, 16:9 like its slides */
+.booklet-wrap--deck {
+  padding-bottom: 0;
+}
+
+.booklet-wrap--deck > figure,
+.booklet--deck {
+  max-width: none;
+}
+
+.booklet--deck {
+  aspect-ratio: 16 / 9;
+}
+
 /* ---------------------------------------------------------------------
    11. BRAND SHOWCASE PANEL (WinRAR re-brand)
    --------------------------------------------------------------------- */
